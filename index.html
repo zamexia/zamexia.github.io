@@ -1,75 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Página Web con Formulario</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .contenedor {
-      background-color: #ffffff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-      text-align: center;
-    }
-    h1 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-    .grupo-de-formularios {
-      margin-bottom: 15px;
-      text-align: left;
-    }
-    label {
-      display: block;
-      margin-bottom: 5px;
-      color: #555;
-      font-weight: bold;
-    }
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-sizing: border-box;
-      font-size: 16px;
-    }
-    textarea {
-      resize: vertical;
-      height: 80px;
-    }
-    button[type="submit"] {
-      background-color: #007bff;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 18px;
-      margin-top: 10px;
-      transition: background-color 0.3s ease;
-    }
-    button[type="submit"]:hover {
-      background-color: #0056b3;
-    }
-    .nota {
-      font-size: 0.9em;
-      color: #777;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web con Formulario</title>
+    <style>
+        /* Estilos CSS mínimos para la estética */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+            font-size: 16px;
+        }
+        textarea {
+            resize: vertical; /* Permite redimensionar verticalmente */
+            min-height: 80px;
+        }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+<body>
+    <div class="container">
+        <h1>¡Bienvenido a Mi Página!</h1>
+        <p>Este es un ejemplo de página con un formulario simple.</p>
 
+        <h2>Contáctanos</h2>
+        <!-- 
+            IMPORTANTE: 
+            Reemplaza la URL en el atributo 'action' con la URL real de tu webhook de n8n 
+            o el servicio que uses para procesar los datos del formulario.
+            La URL que GPT te dio es solo un ejemplo.
+        -->
+        <form method="POST" action="TU_URL_DE_WEBHOOK_N8N_AQUI">
+            <div class="form-group">
+                <label for="nombre">Tu nombre:</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Introduce tu nombre" required />
+            </div>
+            <div class="form-group">
+                <label for="correo">Tu correo electrónico:</label>
+                <input type="email" id="correo" name="correo" placeholder="Introduce tu correo" required />
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Tu mensaje:</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+            </div>
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+
+        <p class="note">
+            Recuerda que para que este formulario envíe datos, necesitas configurar un webhook
+            (por ejemplo, en n8n) y reemplazar "TU_URL_DE_WEBHOOK_N8N_AQUI" con la URL real que te genere.
+        </p>
+    </div>
+</body>
+</html>
