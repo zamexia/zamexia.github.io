@@ -1,110 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
-<cabeza>
- <meta conjunto de caracteres=„UTF-8">
- <meta nombre="ventana gráfica" contenido="ancho=ancho-del-dispositivo, escala-inicial=1.0">
- <tipulo>Mi Página Web con Formulario</tipulo>
- <estilo>
- /* Estilos CSS míos para la estética */
- cuerpo {
- familia de fuentes: Arial, sans-serif;
- color de fondo: #f4f4f4;
- display: flex;
- justificar-contenido: centro;
- align-items: centro;
- alta mía: 100vh;
- margen: 0;
-        }
- .contenedor {
- color de fondo: #ffffff;
- relleno: 30px;
- radio del borde: 8px;
- caja-sombra: 0 4px 8px rgba(0, 0, 0, 0.1);
- ancho: 100%;
- ancho máximo: 500px;
- alineación de texto: centro;
-        }
- h1 {
- color: #333;
- margen inferior: 20px;
-        }
- .grupo de formularios {
- margen inferior: 15px;
- alineación de texto: izquierda;
-        }
- etiqueta {
- másrar: bloquear;
- margen inferior: 5px;
- color: #555;
- peso de fuente: negrita;
-        }
- entrada[tipo="texto"],
- entrada[tipo="correo electrónico"],
- área de texto {
- ancho: calc(100% - 20px);
- relleno: 10px;
- borde: 1px sólido #ddd;
- radio del borde: 4px;
- tamaño de caja: border-box; /* Incluye relleno y borde en el ancho total */
- tamaño de fuente: 16px;
-        }
- área de texto {
- redimensionar: vertical; /* Permiso redimensionar verticalmente */
- alta mía: 80px;
-        }
- botón[tipo="enviar"] {
- color de fondo: #007bff;
- color: blanco;
- relleno: 12px 20px;
- frontera: ninguna;
- radio del borde: 5px;
- cursor: puntero;
- tamaño de fuente: 18px;
- margen superior: 10px;
- transición: color de fondo 0,3 s facilidad;
-        }
- botón[tipo="enviar"]:flotar {
- color de fondo: #0056b3;
-        }
- .nota {
- tamaño de fuente: 0,9em;
- color: #777;
- margen superior: 20px;
-        }
- </estilo>
-</cabeza>
-<cuervo>
- <div clasa="contenedor">
- <h1>¡Bienvenido a Mi Página!</h1>
- <p>Este es un ejemplo de página con un formulario simple.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Página Web con Formulario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .contenedor {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .grupo-de-formularios {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
+      height: 80px;
+    }
+    button[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .nota {
+      font-size: 0.9em;
+      color: #777;
+      margin-top: 20px;
+    }
+  </style>
+</head>
 
- <h2>Contáctanos</h2>
- <!-- 
- IMPORTANTE: 
- Reemplaza la URL en el atributo 'acción' con la URL real de tu webhook de n8n 
- o el servicio que utiliza para procesar los datos del formulario.
- La URL que GPT te dio es solo un ejemplo.
- -->
- <formulario método="POST" accidente="TU_URL_DE_WEBHOOK_N8N_AQUI">
- <div clasa="grupo de formularios">
- <etiqueta para="nombre">Tu nombre:</etiqueta>
- <tipo de entrada="texto" id="nombre" nombre="nombre" marcador de posición="Introducir tu nombre" Requerido />
- </div>
- <div clasa="grupo de formularios">
- <etiqueta para="correo">Tu correo electrónico:</etiqueta>
- <tipo de entrada="correo electrónico" id="correo" nombre="correo" marcador de posición="Introducir tu correo" Requerido />
- </div>
- <div clasa="grupo de formularios">
- <etiqueta para="mensaje">Tu mensaje:</etiqueta>
- <id de Área de texto="mensaje" nombre="mensaje" marcador de posición="Escribe tu mensaje aquí..." Requerido></Área de texto>
- </div>
- <tipo de botón="enviar">Enviar Mensaje</botón>
- </formulario>
-
- <p clasa="nota">
- Recuerdo que para que este formulario envíe datos, necesitas configurar un webhook
- (por ejemplo, en n8n) y reemplazar "TU_URL_DE_WEBHOOK_N8N_AQUI" con la URL real que te genere.
- </p>
- </div>
-</cuervo>
-</html>
