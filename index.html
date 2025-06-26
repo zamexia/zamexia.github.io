@@ -3,108 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web con Formulario</title>
+    <title>ZamexIA - Inteligencia Simbiótica para tu Negocio</title>
+    
+    <!-- CSS Embebido -->
     <style>
-        /* Estilos CSS mínimos para la estética */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        /* === RESETEO Y ESTILOS GLOBALES === */
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+            scroll-behavior: smooth; /* Para el desplazamiento suave de las anclas */
         }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
         .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        h1, h2, h3 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.2em;
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        /* === ENCABEZADO Y NAVEGACIÓN === */
+        .main-header {
+            background-color: #ffffff;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .main-nav ul li {
+            margin-left: 25px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a:hover {
+            color: #0056b3;
+        }
+
+        /* === SECCIÓN HERO === */
+        #inicio {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.8), rgba(25, 25, 112, 0.9)), url('https://images.unsplash.com/photo-1555066931-4365d1469cbe?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            color: #ffffff;
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .hero-content h1 {
+            font-size: 3em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: #ffffff;
+            color: #0056b3;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+            color: #004494;
+        }
+
+        /* === SECCIÓN DE SERVICIOS === */
+        #servicios .services-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
             background-color: #ffffff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
             text-align: center;
+            flex-basis: 31%; /* Divide el espacio entre 3 */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        h1 {
-            color: #333;
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .service-card h3 {
+            color: #0056b3;
+            margin-top: 15px;
+        }
+
+        /* === SECCIÓN SOBRE NOSOTROS === */
+        #sobre-nosotros .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        #sobre-nosotros .about-text {
+            flex: 1;
+        }
+
+        /* === SECCIÓN DE CONTACTO === */
+        .contact-form {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
             margin-bottom: 20px;
         }
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        label {
+
+        .form-group label {
             display: block;
             margin-bottom: 5px;
-            color: #555;
             font-weight: bold;
         }
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: 1px solid #ddd;
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box; /* Incluye padding y borde en el ancho total */
-            font-size: 16px;
+            font-size: 1em;
         }
-        textarea {
-            resize: vertical; /* Permite redimensionar verticalmente */
-            min-height: 80px;
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
         }
-        button[type="submit"] {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #0056b3;
+            color: #fff;
             border: none;
             border-radius: 5px;
+            font-size: 1.2em;
             cursor: pointer;
-            font-size: 18px;
-            margin-top: 10px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
-        button[type="submit"]:hover {
-            background-color: #0056b3;
+
+        .submit-btn:hover {
+            background-color: #004494;
         }
-        .note {
-            font-size: 0.9em;
-            color: #777;
-            margin-top: 20px;
+
+        /* === FOOTER === */
+        .main-footer {
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .social-links a {
+            color: #f5f5f5;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+
+        .social-links a:hover {
+            color: #0056b3;
+        }
+
+        .footer-links {
+            margin: 15px 0;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* === RESPONSIVIDAD PARA MÓVILES === */
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-direction: column;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                margin-top: 15px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .main-nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+
+            .services-grid {
+                flex-direction: column;
+            }
+
+            #sobre-nosotros .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>¡Bienvenido a Mi Página!</h1>
-        <p>Este es un ejemplo de página con un formulario simple.</p>
 
-        <h2>Contáctanos</h2>
-        <!-- 
-            IMPORTANTE: 
-            Reemplaza la URL en el atributo 'action' con la URL real de tu webhook de n8n 
-            o el servicio que uses para procesar los datos del formulario.
-            La URL que GPT te dio es solo un ejemplo.
-        -->
-        <form method="POST" action="TU_URL_DE_WEBHOOK_N8N_AQUI">
-            <div class="form-group">
-                <label for="nombre">Tu nombre:</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Introduce tu nombre" required />
-            </div>
-            <div class="form-group">
-                <label for="correo">Tu correo electrónico:</label>
-                <input type="email" id="correo" name="correo" placeholder="Introduce tu correo" required />
-            </div>
-            <div class="form-group">
-                <label for="mensaje">Tu mensaje:</label>
-                <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
-            </div>
-            <button type="submit">Enviar Mensaje</button>
-        </form>
+    <!-- 1. Encabezado -->
+    <header class="main-header">
+        <div class="container">
+            <a href="#inicio" class="logo">ZamexIA</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <p class="note">
-            Recuerda que para que este formulario envíe datos, necesitas configurar un webhook
-            (por ejemplo, en n8n) y reemplazar "TU_URL_DE_WEBHOOK_N8N_AQUI" con la URL real que te genere.
-        </p>
-    </div>
+    <main>
+        <!-- 2. Sección Hero -->
+        <section id="inicio">
+            <div class="hero-content container">
+                <h1>Impulsamos tu negocio con inteligencia simbiótica</h1>
+                <p>Soluciones de IA que se integran, aprenden y crecen contigo.</p>
+                <a href="#contacto" class="btn">Solicita una consulta</a>
+            </div>
+        </section>
+
+        <!-- 3. Sección de Servicios -->
+        <section id="servicios">
+            <div class="container">
+                <h2>Nuestras Soluciones</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Automatización Personalizada</h3>
+                        <p>Optimizamos tus procesos liberando a tu equipo para que se enfoque en lo que realmente importa: el crecimiento.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Chatbots Inteligentes</h3>
+                        <p>Ofrecemos atención al cliente 24/7 con asistentes virtuales que entienden y resuelven las necesidades de tus usuarios.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Análisis Estratégico</h3>
+                        <p>Convertimos tus datos en decisiones informadas. Identificamos patrones y oportunidades que el ojo humano no puede ver.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Sección Sobre Nosotros -->
+        <section id="sobre-nosotros">
+            <div class="container about-content">
+                <div class="about-text">
+                    <h2>Innovación con Propósito Humano</h2>
+                    <h3>Nuestra Misión</h3>
+                    <p>En ZamexIA, creemos que la tecnología debe ser un aliado, no un reemplazo. Nuestra misión es democratizar el acceso a la inteligencia artificial, especialmente para los negocios locales, creando soluciones que potencian la capacidad humana y fomentan un crecimiento sostenible y ético.</p>
+                    <h3>Nuestra Visión</h3>
+                    <p>Ser el socio tecnológico de confianza que transforma los desafíos de hoy en las oportunidades del mañana, construyendo un futuro donde la inteligencia artificial y la humana trabajan en perfecta simbiosis.</p>
+                </div>
+                <!-- Opcional: Puedes añadir una imagen aquí. Por ejemplo:
+                <div class="about-image">
+                    <img src="URL_DE_TU_IMAGEN" alt="Equipo de ZamexIA">
+                </div>
+                -->
+            </div>
+        </section>
+
+        <!-- 5. Formulario de Contacto -->
+        <section id="contacto">
+            <div class="container">
+                <h2>Hablemos de tu Proyecto</h2>
+                <div class="contact-form">
+                    <!--
+                        IMPORTANTE: La 'action' de este formulario es un marcador de posición.
+                        Deberás reemplazar "TU_URL_WEBHOOK" con la URL real que generes
+                        en tu herramienta de automatización como n8n.
+                    -->
+                    <form method="POST" action="TU_URL_WEBHOOK">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo:</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="correo">Correo Electrónico:</label>
+                            <input type="email" id="correo" name="correo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">¿Cómo podemos ayudarte?</label>
+                            <textarea id="mensaje" name="mensaje" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Enviar Consulta</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 6. Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="social-links">
+                <!-- Emojis o texto como íconos simulados -->
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">Twitter</a>
+                <a href="#" target="_blank">GitHub</a>
+            </div>
+            <div class="footer-links">
+                <a href="#">Términos de Servicio</a> | <a href="#">Política de Privacidad</a>
+            </div>
+            <!-- El año se actualizará automáticamente con un pequeño script -->
+            <p>© <span id="current-year">2024</span> ZamexIA. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Pequeño script para actualizar el año en el footer automáticamente -->
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
 </body>
 </html>
