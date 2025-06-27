@@ -3,550 +3,598 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZamexIA - Inteligencia Simbiótica para tu Negocio</title>
-    
-    <!-- CSS Embebido -->
+    <title>ZamexIA - Soluciones de Inteligencia Artificial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* === RESETEO Y ESTILOS GLOBALES === */
+        /* --- VARIABLES Y ESTILOS GLOBALES --- */
+        :root {
+            --dark-bg: #111827;       /* Fondo principal oscuro */
+            --secondary-bg: #1F2937; /* Fondo para tarjetas y elementos */
+            --accent-color: #06B6D4;  /* Cian brillante */
+            --accent-hover: #0891B2; /* Cian más oscuro para hover */
+            --text-primary: #F3F4F6;  /* Texto principal claro */
+            --text-secondary: #9CA3AF;/* Texto secundario/párrafos */
+        }
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
             scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
             line-height: 1.6;
         }
 
         .container {
-            width: 90%;
             max-width: 1100px;
             margin: 0 auto;
-            padding: 40px 0;
+            padding: 0 2rem;
         }
 
         h1, h2, h3 {
-            color: #1a1a1a;
-            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         h2 {
+            font-size: 2.5rem;
             text-align: center;
-            font-size: 2.2em;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
         }
 
         section {
-            padding: 60px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        section:last-of-type {
-            border-bottom: none;
-        }
-
-        /* === ENCABEZADO Y NAVEGACIÓN === */
-        .main-header {
-            background-color: #ffffff;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .main-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0;
-        }
-
-        .logo {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #0056b3;
-            text-decoration: none;
-        }
-
-        .main-nav ul {
-            list-style: none;
-            display: flex;
-        }
-
-        .main-nav ul li {
-            margin-left: 25px;
-        }
-
-        .main-nav a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .main-nav a:hover {
-            color: #0056b3;
-        }
-
-        /* === SECCIÓN HERO === */
-        #inicio {
-            background: linear-gradient(135deg, rgba(0, 86, 179, 0.8), rgba(25, 25, 112, 0.9)), url('https://images.unsplash.com/photo-1555066931-4365d1469cbe?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
-            color: #ffffff;
-            text-align: center;
-            padding: 120px 0;
-        }
-
-        .hero-content h1 {
-            font-size: 3em;
-            color: #ffffff;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero-content p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
+            padding: 6rem 0;
         }
 
         .btn {
-            background-color: #ffffff;
-            color: #0056b3;
-            padding: 15px 30px;
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            font-weight: 600;
             text-decoration: none;
             border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
-            background-color: #e0e0e0;
-            color: #004494;
+            background-color: var(--accent-hover);
         }
 
-        /* === SECCIÓN DE SERVICIOS === */
-        .services-grid {
+        /* --- ENCABEZADO Y NAVEGACIÓN --- */
+        .header {
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--secondary-bg);
+        }
+
+        .navbar {
             display: flex;
             justify-content: space-between;
-            gap: 30px;
-            margin-top: 40px;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--text-primary);
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        /* --- SECCIÓN DE PRESENTACIÓN (HERO) --- */
+        #inicio {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(90deg, var(--accent-color), #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        /* --- SECCIÓN DE SERVICIOS --- */
+        #servicios {
+            background-color: var(--secondary-bg);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
         .service-card {
-            background-color: #ffffff;
-            padding: 30px;
+            background-color: var(--dark-bg);
+            padding: 2rem;
             border-radius: 8px;
-            text-align: center;
-            flex-basis: 31%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border: 1px solid #374151;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
+        
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .service-card h3 {
-            color: #0056b3;
-            margin-top: 15px;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
         }
 
-        /* === SECCIÓN SOBRE NOSOTROS === */
-        #sobre-nosotros .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
+        .service-card p {
+            color: var(--text-secondary);
         }
 
-        #sobre-nosotros .about-text {
-            flex: 1;
-        }
-
-        /* === FOOTER === */
-        .main-footer {
-            background-color: #1a1a1a;
-            color: #f5f5f5;
+        /* --- SECCIÓN "POR QUÉ ELEGIRNOS" --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
             text-align: center;
-            padding: 30px 0;
         }
 
-        .social-links a {
-            color: #f5f5f5;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1em;
+        .feature-item .icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem auto;
+            color: var(--accent-color);
         }
 
-        .social-links a:hover {
-            color: #0056b3;
+        .feature-item h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
         }
 
-        .footer-links {
-            margin: 15px 0;
+        .feature-item p {
+            color: var(--text-secondary);
         }
 
-        .footer-links a {
-            color: #aaa;
-            text-decoration: none;
-            margin: 0 10px;
+        /* --- SECCIÓN DE CONTACTO --- */
+        #contacto {
+            background-color: var(--secondary-bg);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
         }
         
-        .footer-links a:hover {
-            text-decoration: underline;
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--dark-bg);
+            border: 1px solid #374151;
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
         }
-        
-        /* === ESTILOS DEL CHAT FLOTANTE === */
-        #chat-toggle-button {
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        /* --- PIE DE PÁGINA --- */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--secondary-bg);
+        }
+
+        /* --- CHAT FLOTANTE --- */
+        .chat-fab {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 2rem;
+            right: 2rem;
             width: 60px;
             height: 60px;
-            background-color: #0056b3;
-            color: white;
+            background-color: var(--accent-color);
             border-radius: 50%;
-            border: none;
-            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 1000;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+            z-index: 1001;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .chat-fab:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.1);
+        }
+
+        .chat-fab .icon {
+            width: 32px;
+            height: 32px;
+            color: var(--dark-bg);
+        }
+        
+        .chat-modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none; /* Se activa con JS */
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .chat-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .chat-modal-content {
+            position: relative;
+            background-color: var(--secondary-bg);
+            width: 90%;
+            max-width: 400px;
+            height: 80%;
+            max-height: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95);
             transition: transform 0.3s ease;
         }
 
-        #chat-toggle-button:hover {
-            transform: scale(1.1);
-        }
-        
-        #chat-toggle-button svg {
-            width: 32px;
-            height: 32px;
-        }
-        
-        #chat-window {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 90%;
-            max-width: 370px;
-            height: 500px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: none; /* Oculto por defecto */
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 1000;
-        }
-        
-        #chat-window.active {
-            display: flex; /* Se muestra al hacer clic */
+        .chat-modal.active .chat-modal-content {
+            transform: scale(1);
         }
 
-        .chat-header {
-            background-color: #0056b3;
-            color: white;
-            padding: 15px;
-            font-weight: bold;
+        .chat-modal-header {
+            padding: 1rem;
+            background-color: var(--dark-bg);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
-        .chat-close-btn {
-            cursor: pointer;
-            font-size: 1.5em;
-            line-height: 1;
+        .chat-modal-header h4 {
+            color: var(--text-primary);
         }
 
-        #chat-messages {
-            flex-grow: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .message {
-            padding: 10px 15px;
-            border-radius: 18px;
-            max-width: 80%;
-            line-height: 1.4;
-        }
-        
-        .user-message {
-            background-color: #0056b3;
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
-        
-        .bot-message {
-            background-color: #e9e9eb;
-            color: #333;
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
-        
-        .bot-typing {
-            font-style: italic;
-            color: #888;
-            align-self: flex-start;
-        }
-
-        #chat-form {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #ddd;
-        }
-
-        #chat-input {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            margin-right: 10px;
-        }
-        
-        #chat-send-btn {
-            background-color: #0056b3;
-            color: white;
+        .close-chat {
+            background: none;
             border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
             cursor: pointer;
-            font-size: 1.2em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #chat-send-btn:hover {
-            background-color: #004494;
+            line-height: 1;
+            padding: 0.2rem;
         }
 
-        /* === RESPONSIVIDAD === */
-        @media (max-width: 768px) {
-            .main-header .container { flex-direction: column; }
-            .main-nav ul { flex-direction: column; margin-top: 15px; width: 100%; text-align: center; }
-            .main-nav ul li { margin: 10px 0; }
-            .hero-content h1 { font-size: 2.2em; }
-            .services-grid, #sobre-nosotros .about-content { flex-direction: column; text-align: center; }
-            #chat-window {
-                width: calc(100% - 20px);
-                height: 70vh;
-                bottom: 10px;
-                right: 10px;
+        #chat-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media(max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 65px; /* Altura del header */
+                flex-direction: column;
+                background-color: var(--dark-bg);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                padding: 1.5rem 0;
+                border-bottom: 1px solid var(--secondary-bg);
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .chat-fab {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .chat-modal-content {
+                width: 100%;
+                height: 100%;
+                max-width: 100%;
+                max-height: 100%;
+                border-radius: 0;
             }
         }
+
     </style>
 </head>
 <body>
 
-    <!-- 1. Encabezado -->
-    <header class="main-header">
-        <div class="container">
-            <a href="#inicio" class="logo">ZamexIA</a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
-                </ul>
-            </nav>
-        </div>
+    <!-- ======================= ENCABEZADO ======================= -->
+    <header class="header">
+        <nav class="navbar container">
+            <a href="#inicio" class="logo">Zamex<span>IA</span></a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="#servicios" class="nav-link">Servicios</a></li>
+                <li class="nav-item"><a href="#sobre" class="nav-link">Sobre ZamexIA</a></li>
+                <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
     </header>
 
     <main>
-        <!-- 2. Sección Hero -->
+        <!-- ======================= SECCIÓN DE PRESENTACIÓN ======================= -->
         <section id="inicio">
-            <div class="hero-content container">
-                <h1>Impulsamos tu negocio con inteligencia simbiótica</h1>
-                <p>Soluciones de IA que se integran, aprenden y crecen contigo.</p>
-                <a href="#" id="hero-contact-btn" class="btn">Habla con un Asistente</a>
+            <div class="container hero-content">
+                <h1>Potencia tu negocio con <span>inteligencia estratégica</span></h1>
+                <p class="subtitle">Desarrollamos soluciones de Inteligencia Artificial a medida para que pequeñas y medianas empresas automaticen procesos, optimicen recursos y crezcan sin límites.</p>
+                <a href="#contacto" class="btn">Solicita una demostración</a>
             </div>
         </section>
 
-        <!-- 3. Sección de Servicios -->
+        <!-- ======================= SECCIÓN DE SERVICIOS ======================= -->
         <section id="servicios">
             <div class="container">
-                <h2>Nuestras Soluciones</h2>
+                <h2>Nuestros Servicios</h2>
+                <p class="section-subtitle">Soluciones diseñadas para integrarse perfectamente en tu flujo de trabajo y potenciar tus resultados.</p>
                 <div class="services-grid">
-                    <div class="service-card"><h3>Automatización Personalizada</h3><p>Optimizamos tus procesos liberando a tu equipo para que se enfoque en lo que realmente importa: el crecimiento.</p></div>
-                    <div class="service-card"><h3>Chatbots Inteligentes</h3><p>Ofrecemos atención al cliente 24/7 con asistentes virtuales que entienden y resuelven las necesidades de tus usuarios.</p></div>
-                    <div class="service-card"><h3>Análisis Estratégico</h3><p>Convertimos tus datos en decisiones informadas. Identificamos patrones y oportunidades que el ojo humano no puede ver.</p></div>
+                    <div class="service-card">
+                        <h3>Bots Personalizados</h3>
+                        <p>Creamos chatbots y voicebots inteligentes que resuelven dudas, captan leads y ofrecen soporte 24/7, mejorando la experiencia de tus clientes.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Automatización con IA</h3>
+                        <p>Identificamos y automatizamos tareas repetitivas en tu empresa, desde la gestión de emails hasta procesos complejos, liberando a tu equipo para tareas de mayor valor.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Análisis de Datos</h3>
+                        <p>Transformamos tus datos en insights accionables. Descubre patrones, predice tendencias y toma decisiones basadas en información precisa y relevante.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Asistencia Multicanal</h3>
+                        <p>Integramos nuestras soluciones de asistencia inteligente en WhatsApp, Instagram, tu página web y Facebook, centralizando la comunicación con tus clientes.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. Sección Sobre Nosotros -->
-        <section id="sobre-nosotros">
-            <div class="container about-content">
-                <div class="about-text">
-                    <h2>Innovación con Propósito Humano</h2>
-                    <h3>Nuestra Misión</h3>
-                    <p>En ZamexIA, creemos que la tecnología debe ser un aliado, no un reemplazo. Nuestra misión es democratizar el acceso a la inteligencia artificial, especialmente para los negocios locales, creando soluciones que potencian la capacidad humana y fomentan un crecimiento sostenible y ético.</p>
-                    <h3>Nuestra Visión</h3>
-                    <p>Ser el socio tecnológico de confianza que transforma los desafíos de hoy en las oportunidades del mañana, construyendo un futuro donde la inteligencia artificial y la humana trabajan en perfecta simbiosis.</p>
+        <!-- ======================= SECCIÓN "POR QUÉ ELEGIRNOS" ======================= -->
+        <section id="sobre">
+            <div class="container">
+                <h2>¿Por qué ZamexIA?</h2>
+                <p class="section-subtitle">No solo creamos tecnología, creamos ventajas competitivas para tu negocio.</p>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+                        <h3>Soluciones a Medida</h3>
+                        <p>Analizamos tus necesidades específicas para crear una solución de IA que se adapte perfectamente a tu empresa, no al revés.</p>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                        <h3>Implementación Rápida</h3>
+                        <p>Nuestro proceso ágil nos permite desarrollar e integrar las soluciones en tiempo récord, para que veas resultados cuanto antes.</p>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3>Soporte Continuo</h3>
+                        <p>No desaparecemos tras la entrega. Ofrecemos soporte y mantenimiento para asegurar que tu solución de IA evolucione con tu negocio.</p>
+                    </div>
                 </div>
             </div>
         </section>
-        
-        <!-- SECCIÓN DE CONTACTO ELIMINADA -->
 
+        <!-- ======================= SECCIÓN DE CONTACTO ======================= -->
+        <section id="contacto">
+            <div class="container">
+                <h2>Hablemos de tu Proyecto</h2>
+                <p class="section-subtitle">Completa el formulario y uno de nuestros especialistas se pondrá en contacto contigo para ofrecerte una asesoría gratuita.</p>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Tu Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" placeholder="Cuéntanos sobre tu negocio y tus necesidades..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
     </main>
 
-    <!-- 5. Footer -->
-    <footer class="main-footer">
+    <!-- ======================= PIE DE PÁGINA ======================= -->
+    <footer class="footer">
         <div class="container">
-            <div class="social-links">
-                <a href="#" target="_blank">LinkedIn</a>
-                <a href="#" target="_blank">Twitter</a>
-                <a href="#" target="_blank">GitHub</a>
-            </div>
-            <div class="footer-links">
-                <a href="#">Términos de Servicio</a> | <a href="#">Política de Privacidad</a>
-            </div>
-            <p>© <span id="current-year">2024</span> ZamexIA. Todos los derechos reservados.</p>
+            <p>© 2024 ZamexIA. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- 6. CHAT FLOTANTE -->
-    <div id="chat-widget">
-        <button id="chat-toggle-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="32" height="32"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-        </button>
-        <div id="chat-window">
-            <div class="chat-header">
-                <span>Asistente ZamexIA</span>
-                <span class="chat-close-btn">×</span>
+    <!-- ======================= CHAT FLOTANTE Y MODAL ======================= -->
+    <div class="chat-fab" id="openChat">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.15l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.15 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
+        </svg>          
+    </div>
+
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-modal-content">
+            <div class="chat-modal-header">
+                <h4>Asistente Virtual ZamexIA</h4>
+                <button class="close-chat" id="closeChat">×</button>
             </div>
-            <div id="chat-messages">
-                <!-- Los mensajes se añadirán aquí con JavaScript -->
-            </div>
-            <form id="chat-form">
-                <input type="text" id="chat-input" placeholder="Escribe un mensaje..." autocomplete="off">
-                <button type="submit" id="chat-send-btn">➤</button>
-            </form>
+            <iframe id="chat-iframe" src="http://35.226.84.232:5678/webhook/webchat-webhook-placeholder"></iframe>
         </div>
     </div>
 
-
-    <!-- JavaScript -->
     <script>
-        // Script para actualizar el año en el footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // --- LÓGICA DEL CHAT FLOTANTE ---
         document.addEventListener('DOMContentLoaded', () => {
-            const chatToggle = document.getElementById('chat-toggle-button');
-            const heroContactBtn = document.getElementById('hero-contact-btn');
-            const chatWindow = document.getElementById('chat-window');
-            const chatClose = document.querySelector('.chat-close-btn');
-            const chatForm = document.getElementById('chat-form');
-            const chatInput = document.getElementById('chat-input');
-            const chatMessages = document.getElementById('chat-messages');
 
-            const webhookUrl = "http://35.226.84.232:5678/webhook/webchat-webhook-placeholder";
-            let isFirstOpen = true;
+            // --- Lógica del menú móvil (hamburguesa) ---
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
 
-            // Función para abrir el chat
-            const openChat = () => {
-                chatWindow.classList.add('active');
-                if (isFirstOpen) {
-                    const welcomeMessage = "¡Hola! Soy tu asistente de ZamexIA. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre nuestros servicios, generar una solicitud o pedir una cotización.";
-                    addMessage(welcomeMessage, 'bot');
-                    isFirstOpen = false;
-                }
-            };
-            
-            // Función para cerrar el chat
-            const closeChat = () => {
-                chatWindow.classList.remove('active');
-            };
-
-            // Event Listeners para abrir y cerrar
-            chatToggle.addEventListener('click', () => {
-                if (chatWindow.classList.contains('active')) {
-                    closeChat();
-                } else {
-                    openChat();
-                }
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
             });
             
-            if (heroContactBtn) {
-                heroContactBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openChat();
-                });
-            }
+            // Cierra el menú al hacer clic en un enlace
+            navLinks.forEach(link => link.addEventListener('click', () => {
+                 hamburger.classList.remove('active');
+                 navMenu.classList.remove('active');
+            }));
 
-            chatClose.addEventListener('click', closeChat);
+            // --- Lógica del chat flotante ---
+            const openChatBtn = document.getElementById('openChat');
+            const closeChatBtn = document.getElementById('closeChat');
+            const chatModal = document.getElementById('chatModal');
 
-            // Función para añadir mensajes a la ventana del chat
-            function addMessage(text, sender) {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message', `${sender}-message`);
-                messageElement.textContent = text;
-                chatMessages.appendChild(messageElement);
-                // Auto-scroll al último mensaje
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-                return messageElement;
-            }
+            openChatBtn.addEventListener('click', () => {
+                chatModal.classList.add('active');
+            });
 
-            // Manejar el envío del formulario
-            chatForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const userText = chatInput.value.trim();
-                if (!userText) return;
+            closeChatBtn.addEventListener('click', () => {
+                chatModal.classList.remove('active');
+            });
 
-                // Muestra el mensaje del usuario inmediatamente
-                addMessage(userText, 'user');
-                chatInput.value = '';
-
-                // Muestra un indicador de "escribiendo..."
-                const typingIndicator = addMessage('...', 'bot-typing');
-
-                try {
-                    // Envía el mensaje al webhook de n8n
-                    const response = await fetch(webhookUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ message: userText }),
-                    });
-
-                    // Elimina el indicador de "escribiendo..."
-                    chatMessages.removeChild(typingIndicator);
-
-                    if (!response.ok) {
-                        throw new Error(`Error del servidor: ${response.status}`);
-                    }
-
-                    // Suponemos que la respuesta de n8n es un JSON con una clave "response"
-                    const data = await response.json();
-                    const botResponse = data.response || "No he podido procesar tu solicitud en este momento. Inténtalo de nuevo.";
-                    
-                    // Muestra la respuesta del bot
-                    addMessage(botResponse, 'bot');
-
-                } catch (error) {
-                    console.error('Error al contactar el webhook:', error);
-                    // Elimina el indicador de "escribiendo..." y muestra un error
-                    if (typingIndicator.parentNode) {
-                        chatMessages.removeChild(typingIndicator);
-                    }
-                    addMessage("Hubo un error al conectar. Por favor, intenta más tarde.", 'bot');
+            // Opcional: Cerrar el modal al hacer clic fuera del contenido
+            chatModal.addEventListener('click', (e) => {
+                if (e.target === chatModal) {
+                    chatModal.classList.remove('active');
                 }
             });
+
         });
     </script>
 
