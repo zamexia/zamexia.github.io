@@ -109,11 +109,6 @@
             color: var(--text-primary);
         }
 
-        .hamburger {
-            display: none;
-            cursor: pointer;
-        }
-
         /* --- 3. SECCIÓN DE PRESENTACIÓN (HERO) --- */
         #inicio {
             padding-top: 10rem; /* Espacio para el header fijo */
@@ -182,6 +177,7 @@
 
         .service-card p {
             color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
         /* --- 5. SECCIÓN "POR QUÉ ELEGIRNOS" --- */
@@ -210,6 +206,7 @@
 
         .why-us-item p {
             color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
         /* --- 6. BOTÓN FLOTANTE Y MODAL DE CHAT --- */
@@ -219,7 +216,7 @@
             right: 2rem;
             z-index: 101;
             background-color: var(--accent-cyan);
-            color: var(--text-primary);
+            color: var(--bg-dark);
             padding: 0.8rem 1.5rem;
             border-radius: 50px;
             font-weight: 600;
@@ -266,33 +263,11 @@
         .chat-modal-overlay.active .chat-modal-content {
             transform: scale(1);
         }
-
-        .chat-modal-header {
-            padding: 1rem;
-            background-color: var(--bg-dark);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            flex-shrink: 0;
-        }
-        .chat-modal-header h4 {
-            font-weight: 600;
-        }
-        .chat-modal-close {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 1.8rem;
-            cursor: pointer;
-            line-height: 1;
-        }
-
+        
         #chat-iframe {
             width: 100%;
             height: 100%;
             border: none;
-            flex-grow: 1; /* Permite que el iframe ocupe el espacio restante */
         }
 
         /* --- 7. PIE DE PÁGINA --- */
@@ -308,7 +283,7 @@
             h2 { font-size: 2.2rem; }
             .hero-content h1 { font-size: 2.5rem; }
 
-            .nav-menu { display: none; }
+            .nav-menu { display: none; } /* Menú simple oculto en móvil */
             
             .why-us-grid {
                 grid-template-columns: 1fr;
@@ -339,7 +314,6 @@
 </head>
 <body>
 
-    <!-- ======================= ENCABEZADO ======================= -->
     <header class="header">
         <nav class="navbar container">
             <a href="#inicio" class="logo">Zamex<span>IA</span></a>
@@ -352,8 +326,6 @@
     </header>
 
     <main>
-
-        <!-- ======================= SECCIÓN DE PRESENTACIÓN ======================= -->
         <section id="inicio">
             <div class="container">
                 <div class="hero-content">
@@ -363,50 +335,60 @@
             </div>
         </section>
 
-        <!-- ======================= SECCIÓN DE SERVICIOS ======================= -->
         <section id="servicios">
             <div class="container">
                 <h2>Soluciones para Crecer</h2>
                 <div class="services-grid">
-                    <div class="service-card"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><h3>Bots Personalizados</h3><p>Asistentes virtuales que atienden a tus clientes 24/7, capturan leads y resuelven dudas al instante.</p></div>
-                    <div class="service-card"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.572L16.5 21.75l-.398-1.178a3.375 3.375 0 00-2.455-2.455L12.75 18l1.178-.398a3.375 3.375 0 002.455-2.455L16.5 14.25l.398 1.178a3.375 3.375 0 002.455 2.455L20.25 18l-1.178.398a3.375 3.375 0 00-2.455 2.455z" /></svg><h3>Automatización con IA</h3><p>Eliminamos tareas manuales y repetitivas para que tu equipo se concentre en lo que realmente importa: crecer.</p></div>
-                    <div class="service-card"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v18h18V3H3.75zM8.25 9h7.5M8.25 13.5h3.75m-3.75 4.5h3.75m4.5-4.5h.008v.008h-.008v-.008zm0 4.5h.008v.008h-.008v-.008zm2.25-4.5h.008v.008h-.008V13.5zm0 4.5h.008v.008h-.008v-.008z" /></svg><h3>Análisis Estratégico</h3><p>Convertimos tus datos en decisiones inteligentes. Descubre patrones y oportunidades ocultas en tu negocio.</p></div>
-                    <div class="service-card"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg><h3>Atención Multicanal</h3><p>Integramos la IA en tu Web, WhatsApp, Instagram y Facebook para una experiencia de cliente unificada.</p></div>
+                    <div class="service-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3>Bots Personalizados</h3>
+                        <p>Asistentes virtuales 24/7 que capturan leads y resuelven dudas al instante.</p>
+                    </div>
+                    <div class="service-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.572L16.5 21.75l-.398-1.178a3.375 3.375 0 00-2.455-2.455L12.75 18l1.178-.398a3.375 3.375 0 002.455-2.455L16.5 14.25l.398 1.178a3.375 3.375 0 002.455 2.455L20.25 18l-1.178.398a3.375 3.375 0 00-2.455 2.455z" /></svg>
+                        <h3>Automatización con IA</h3>
+                        <p>Eliminamos tareas repetitivas para que tu equipo se concentre en crecer.</p>
+                    </div>
+                    <div class="service-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v18h18V3H3.75zM8.25 9h7.5M8.25 13.5h3.75m-3.75 4.5h3.75m4.5-4.5h.008v.008h-.008v-.008zm0 4.5h.008v.008h-.008v-.008zm2.25-4.5h.008v.008h-.008V13.5zm0 4.5h.008v.008h-.008v-.008z" /></svg>
+                        <h3>Análisis Estratégico</h3>
+                        <p>Convertimos tus datos en decisiones inteligentes y oportunidades de negocio.</p>
+                    </div>
+                    <div class="service-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+                        <h3>Atención Multicanal</h3>
+                        <p>Integramos IA en tu Web, WhatsApp, Instagram y Facebook para unificar la experiencia.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ======================= SECCIÓN "POR QUÉ ELEGIRNOS" ======================= -->
         <section id="sobre">
             <div class="container">
                 <h2>¿Por Qué Elegirnos?</h2>
                 <div class="why-us-grid">
-                    <div class="why-us-item"><div class="number">01.</div><h3>Enfoque en PYMES</h3><p>Entendemos los desafíos de las pequeñas y medianas empresas. Nuestras soluciones son asequibles, escalables y diseñadas para generar un impacto real.</p></div>
-                    <div class="why-us-item"><div class="number">02.</div><h3>Resultados Medibles</h3><p>No vendemos humo. Nos centramos en entregar resultados tangibles: más ventas, menos costos operativos y clientes más satisfechos.</p></div>
-                    <div class="why-us-item"><div class="number">03.</div><h3>Integración Sencilla</h3><p>Nos encargamos de todo el proceso técnico. Integramos nuestras herramientas en tu flujo de trabajo actual sin complicaciones ni interrupciones.</p></div>
+                    <div class="why-us-item"><div class="number">01.</div><h3>Enfoque en PYMES</h3><p>Entendemos los desafíos de las PYMES. Nuestras soluciones son asequibles, escalables y diseñadas para generar un impacto real.</p></div>
+                    <div class="why-us-item"><div class="number">02.</div><h3>Resultados Medibles</h3><p>Nos centramos en entregar resultados tangibles: más ventas, menos costos operativos y clientes más satisfechos.</p></div>
+                    <div class="why-us-item"><div class="number">03.</div><h3>Integración Sencilla</h3><p>Nos encargamos de todo. Integramos nuestras herramientas en tu flujo de trabajo actual sin complicaciones ni interrupciones.</p></div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ======================= PIE DE PÁGINA ======================= -->
     <footer class="footer"><p>© 2024 ZamexIA. Todos los derechos reservados.</p></footer>
 
-    <!-- ======================= BOTÓN Y MODAL DE CHAT ======================= -->
+    <!-- Botón flotante -->
     <div class="chat-button" id="chat-open-button">
         👉<span class="button-text">  ¿Hablemos de tu proyecto o dudas?</span>
     </div>
 
+    <!-- Modal del chat -->
     <div class="chat-modal-overlay" id="chat-modal">
         <div class="chat-modal-content">
-            <div class="chat-modal-header">
-                <h4>Asistente Virtual ZamexIA</h4>
-                <button class="chat-modal-close" id="chat-close-button">×</button>
-            </div>
-            <!-- IFRAME COLOCADO DIRECTAMENTE EN EL HTML -->
             <iframe 
                 id="chat-iframe"
-                src="http://35.226.84.232:5678/webhook/webchat-webhook-placeholder">
+                src="http://35.226.84.232:5678/webhook/webchat-webhook-placeholder"
+                title="Chat de Asistencia ZamexIA">
             </iframe>
         </div>
     </div>
@@ -414,28 +396,25 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const openChatBtn = document.getElementById('chat-open-button');
-            const closeChatBtn = document.getElementById('chat-close-button');
             const chatModal = document.getElementById('chat-modal');
 
-            // Funciones simples para abrir y cerrar el modal
-            const openModal = () => chatModal.classList.add('active');
-            const closeModal = () => chatModal.classList.remove('active');
+            // Abrir el modal
+            openChatBtn.addEventListener('click', () => {
+                chatModal.classList.add('active');
+            });
 
-            // Asignar eventos a los botones
-            openChatBtn.addEventListener('click', openModal);
-            closeChatBtn.addEventListener('click', closeModal);
-            
             // Cerrar el modal al hacer clic en el fondo oscuro
             chatModal.addEventListener('click', (event) => {
+                // Si el clic fue en el overlay y no en su contenido
                 if (event.target === chatModal) {
-                    closeModal();
+                    chatModal.classList.remove('active');
                 }
             });
 
             // Cerrar el modal con la tecla 'Escape'
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && chatModal.classList.contains('active')) {
-                    closeModal();
+                    chatModal.classList.remove('active');
                 }
             });
         });
