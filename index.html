@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZamexIA - Soluciones de Inteligencia Artificial</title>
+    <title>ZamexIA - Potencia tu Negocio con Inteligencia Estratégica</title>
+    
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VARIABLES Y ESTILOS GLOBALES --- */
+        /* --- 1. VARIABLES Y ESTILOS GLOBALES --- */
         :root {
-            --dark-bg: #111827;       /* Fondo principal oscuro */
-            --secondary-bg: #1F2937; /* Fondo para tarjetas y elementos */
-            --accent-color: #06B6D4;  /* Cian brillante */
-            --accent-hover: #0891B2; /* Cian más oscuro para hover */
-            --text-primary: #F3F4F6;  /* Texto principal claro */
-            --text-secondary: #9CA3AF;/* Texto secundario/párrafos */
+            --bg-dark: #0a0a0a;
+            --bg-secondary: #171717;
+            --accent-cyan: #0891B2;
+            --accent-cyan-hover: #06B6D4;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a3a3a3;
+            --border-color: #262626;
         }
 
         * {
@@ -30,67 +33,50 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-bg);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 16px;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        h1, h2, h3 {
-            font-weight: 600;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 3rem auto;
+            padding: 0 1.5rem;
         }
 
         section {
             padding: 6rem 0;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.8rem;
-            background-color: var(--accent-color);
-            color: var(--dark-bg);
-            font-weight: 600;
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        a {
+            color: var(--accent-cyan);
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            border: none;
-            cursor: pointer;
         }
 
-        .btn:hover {
-            background-color: var(--accent-hover);
-        }
-
-        /* --- ENCABEZADO Y NAVEGACIÓN --- */
+        /* --- 2. ENCABEZADO Y NAVEGACIÓN --- */
         .header {
-            background-color: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--secondary-bg);
+            left: 0;
+            z-index: 100;
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
         }
 
         .navbar {
@@ -103,79 +89,64 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--text-primary);
-            text-decoration: none;
         }
         .logo span {
-            color: var(--accent-color);
+            color: var(--accent-cyan);
         }
 
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 400;
+            color: var(--text-secondary);
+            font-weight: 600;
             transition: color 0.3s ease;
         }
-
         .nav-link:hover {
-            color: var(--accent-color);
+            color: var(--text-primary);
         }
-        
+
         .hamburger {
             display: none;
             cursor: pointer;
         }
 
-        .bar {
-            display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px auto;
-            background-color: var(--text-primary);
-            transition: all 0.3s ease-in-out;
-        }
-
-
-        /* --- SECCIÓN DE PRESENTACIÓN (HERO) --- */
+        /* --- 3. SECCIÓN DE PRESENTACIÓN (HERO) --- */
         #inicio {
-            min-height: 100vh;
+            padding-top: 10rem; /* Espacio para el header fijo */
+            min-height: 80vh;
             display: flex;
             align-items: center;
             text-align: center;
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        .hero-content h1 span {
-            background: linear-gradient(90deg, var(--accent-color), #38bdf8);
+            font-size: 4rem;
+            background: linear-gradient(90deg, var(--text-primary) 70%, var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 1.5rem;
         }
 
         .hero-content .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
-        
-        /* --- SECCIÓN DE SERVICIOS --- */
+
+        /* --- 4. SECCIÓN DE SERVICIOS --- */
         #servicios {
-            background-color: var(--secondary-bg);
+            background-color: var(--bg-secondary);
         }
         
         .services-grid {
@@ -185,238 +156,178 @@
         }
 
         .service-card {
-            background-color: var(--dark-bg);
-            padding: 2rem;
+            background-color: var(--bg-dark);
+            padding: 2.5rem 2rem;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            border: 1px solid #374151;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px);
+            border-color: var(--accent-cyan);
+        }
+        
+        .service-card .icon {
+            width: 48px;
+            height: 48px;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
         }
 
         .service-card h3 {
-            color: var(--accent-color);
-            margin-bottom: 1rem;
             font-size: 1.4rem;
+            margin-bottom: 0.5rem;
         }
 
         .service-card p {
             color: var(--text-secondary);
         }
 
-        /* --- SECCIÓN "POR QUÉ ELEGIRNOS" --- */
-        .features-grid {
+        /* --- 5. SECCIÓN "POR QUÉ ELEGIRNOS" --- */
+        .why-us-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 2rem;
+        }
+
+        .why-us-item {
             text-align: center;
-        }
-
-        .feature-item .icon {
-            width: 50px;
-            height: 50px;
-            margin: 0 auto 1rem auto;
-            color: var(--accent-color);
-        }
-
-        .feature-item h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
-        }
-
-        .feature-item p {
-            color: var(--text-secondary);
-        }
-
-        /* --- SECCIÓN DE CONTACTO --- */
-        #contacto {
-            background-color: var(--secondary-bg);
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
+            padding: 2rem;
         }
         
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            background-color: var(--dark-bg);
-            border: 1px solid #374151;
-            border-radius: 5px;
-            color: var(--text-primary);
-            font-family: 'Poppins', sans-serif;
+        .why-us-item .number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
+        .why-us-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* --- PIE DE PÁGINA --- */
-        .footer {
-            text-align: center;
-            padding: 2rem 0;
+        .why-us-item p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--secondary-bg);
         }
 
-        /* --- CHAT FLOTANTE --- */
-        .chat-fab {
+        /* --- 6. BOTÓN FLOTANTE Y MODAL DE CHAT --- */
+        .chat-button {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            width: 60px;
-            height: 60px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            z-index: 101;
+            background-color: var(--accent-cyan);
+            color: var(--text-primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
-            z-index: 1001;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 5px 20px rgba(8, 145, 178, 0.4);
+            transition: all 0.3s ease;
+        }
+        .chat-button:hover {
+            background-color: var(--accent-cyan-hover);
+            transform: translateY(-3px);
         }
 
-        .chat-fab:hover {
-            background-color: var(--accent-hover);
-            transform: scale(1.1);
-        }
-
-        .chat-fab .icon {
-            width: 32px;
-            height: 32px;
-            color: var(--dark-bg);
-        }
-        
-        .chat-modal {
+        .chat-modal-overlay {
             position: fixed;
             inset: 0;
             background-color: rgba(0, 0, 0, 0.7);
-            display: none; /* Se activa con JS */
+            z-index: 102;
+            display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1002;
             opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s 0.3s;
+        }
+        .chat-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
             transition: opacity 0.3s ease;
         }
 
-        .chat-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
         .chat-modal-content {
-            position: relative;
-            background-color: var(--secondary-bg);
+            background-color: var(--bg-secondary);
             width: 90%;
-            max-width: 400px;
-            height: 80%;
-            max-height: 600px;
-            border-radius: 10px;
-            overflow: hidden;
+            max-width: 420px;
+            height: 85%;
+            max-height: 650px;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
+            overflow: hidden;
             transform: scale(0.95);
             transition: transform 0.3s ease;
         }
-
-        .chat-modal.active .chat-modal-content {
+        .chat-modal-overlay.active .chat-modal-content {
             transform: scale(1);
         }
 
         .chat-modal-header {
             padding: 1rem;
-            background-color: var(--dark-bg);
+            background-color: var(--bg-dark);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid var(--border-color);
         }
-        
         .chat-modal-header h4 {
-            color: var(--text-primary);
+            font-weight: 600;
         }
-
-        .close-chat {
+        .chat-modal-close {
             background: none;
             border: none;
             color: var(--text-secondary);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             line-height: 1;
-            padding: 0.2rem;
         }
 
+        #chat-iframe-container {
+            flex-grow: 1;
+            overflow: hidden;
+        }
         #chat-iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
 
+        /* --- 7. PIE DE PÁGINA --- */
+        .footer {
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+        }
 
-        /* --- RESPONSIVE DESIGN --- */
-        @media(max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 65px; /* Altura del header */
-                flex-direction: column;
-                background-color: var(--dark-bg);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                gap: 0;
-            }
+        /* --- 8. RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            h2 { font-size: 2.2rem; }
+            .hero-content h1 { font-size: 2.5rem; }
 
-            .nav-menu.active {
-                left: 0;
-            }
+            .nav-menu { display: none; } /* En esta versión simplificada, ocultamos el menú en móvil */
             
-            .nav-item {
-                padding: 1.5rem 0;
-                border-bottom: 1px solid var(--secondary-bg);
+            .why-us-grid {
+                grid-template-columns: 1fr;
             }
 
-            .hamburger {
-                display: block;
+            .chat-button {
+                font-size: 0; /* Ocultamos el texto y dejamos solo el emoji */
+                width: 60px;
+                height: 60px;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem; /* Tamaño para el emoji */
             }
-
-            .hamburger.active .bar:nth-child(2) {
-                opacity: 0;
-            }
-            .hamburger.active .bar:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
-            .hamburger.active .bar:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            section {
-                padding: 4rem 0;
-            }
-
-            .chat-fab {
-                bottom: 1rem;
-                right: 1rem;
+            .chat-button .button-text {
+                display: none;
             }
 
             .chat-modal-content {
@@ -427,7 +338,6 @@
                 border-radius: 0;
             }
         }
-
     </style>
 </head>
 <body>
@@ -437,50 +347,50 @@
         <nav class="navbar container">
             <a href="#inicio" class="logo">Zamex<span>IA</span></a>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
-                <li class="nav-item"><a href="#servicios" class="nav-link">Servicios</a></li>
-                <li class="nav-item"><a href="#sobre" class="nav-link">Sobre ZamexIA</a></li>
-                <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="#sobre" class="nav-link">Sobre ZamexIA</a></li>
             </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+            <div class="hamburger"></div> <!-- Placeholder si se quisiera añadir en el futuro -->
         </nav>
     </header>
 
     <main>
+
         <!-- ======================= SECCIÓN DE PRESENTACIÓN ======================= -->
         <section id="inicio">
-            <div class="container hero-content">
-                <h1>Potencia tu negocio con <span>inteligencia estratégica</span></h1>
-                <p class="subtitle">Desarrollamos soluciones de Inteligencia Artificial a medida para que pequeñas y medianas empresas automaticen procesos, optimicen recursos y crezcan sin límites.</p>
-                <a href="#contacto" class="btn">Solicita una demostración</a>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Potencia tu negocio con inteligencia estratégica</h1>
+                    <p class="subtitle">Automatizamos procesos, aumentamos tus ingresos y liberamos tu tiempo con soluciones inteligentes.</p>
+                </div>
             </div>
         </section>
 
         <!-- ======================= SECCIÓN DE SERVICIOS ======================= -->
         <section id="servicios">
             <div class="container">
-                <h2>Nuestros Servicios</h2>
-                <p class="section-subtitle">Soluciones diseñadas para integrarse perfectamente en tu flujo de trabajo y potenciar tus resultados.</p>
+                <h2>Soluciones para Crecer</h2>
                 <div class="services-grid">
                     <div class="service-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         <h3>Bots Personalizados</h3>
-                        <p>Creamos chatbots y voicebots inteligentes que resuelven dudas, captan leads y ofrecen soporte 24/7, mejorando la experiencia de tus clientes.</p>
+                        <p>Asistentes virtuales que atienden a tus clientes 24/7, capturan leads y resuelven dudas al instante.</p>
                     </div>
                     <div class="service-card">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.572L16.5 21.75l-.398-1.178a3.375 3.375 0 00-2.455-2.455L12.75 18l1.178-.398a3.375 3.375 0 002.455-2.455L16.5 14.25l.398 1.178a3.375 3.375 0 002.455 2.455L20.25 18l-1.178.398a3.375 3.375 0 00-2.455 2.455z" /></svg>
                         <h3>Automatización con IA</h3>
-                        <p>Identificamos y automatizamos tareas repetitivas en tu empresa, desde la gestión de emails hasta procesos complejos, liberando a tu equipo para tareas de mayor valor.</p>
+                        <p>Eliminamos tareas manuales y repetitivas para que tu equipo se concentre en lo que realmente importa: crecer.</p>
                     </div>
                     <div class="service-card">
-                        <h3>Análisis de Datos</h3>
-                        <p>Transformamos tus datos en insights accionables. Descubre patrones, predice tendencias y toma decisiones basadas en información precisa y relevante.</p>
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v18h18V3H3.75zM8.25 9h7.5M8.25 13.5h3.75m-3.75 4.5h3.75m4.5-4.5h.008v.008h-.008v-.008zm0 4.5h.008v.008h-.008v-.008zm2.25-4.5h.008v.008h-.008V13.5zm0 4.5h.008v.008h-.008v-.008z" /></svg>
+                        <h3>Análisis Estratégico</h3>
+                        <p>Convertimos tus datos en decisiones inteligentes. Descubre patrones y oportunidades ocultas en tu negocio.</p>
                     </div>
                     <div class="service-card">
-                        <h3>Asistencia Multicanal</h3>
-                        <p>Integramos nuestras soluciones de asistencia inteligente en WhatsApp, Instagram, tu página web y Facebook, centralizando la comunicación con tus clientes.</p>
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+                        <h3>Atención Multicanal</h3>
+                        <p>Integramos la IA en tu Web, WhatsApp, Instagram y Facebook para una experiencia de cliente unificada.</p>
                     </div>
                 </div>
             </div>
@@ -489,47 +399,27 @@
         <!-- ======================= SECCIÓN "POR QUÉ ELEGIRNOS" ======================= -->
         <section id="sobre">
             <div class="container">
-                <h2>¿Por qué ZamexIA?</h2>
-                <p class="section-subtitle">No solo creamos tecnología, creamos ventajas competitivas para tu negocio.</p>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
-                        <h3>Soluciones a Medida</h3>
-                        <p>Analizamos tus necesidades específicas para crear una solución de IA que se adapte perfectamente a tu empresa, no al revés.</p>
+                <h2>¿Por Qué Elegirnos?</h2>
+                <div class="why-us-grid">
+                    <div class="why-us-item">
+                        <div class="number">01.</div>
+                        <h3>Enfoque en PYMES</h3>
+                        <p>Entendemos los desafíos de las pequeñas y medianas empresas. Nuestras soluciones son asequibles, escalables y diseñadas para generar un impacto real.</p>
                     </div>
-                    <div class="feature-item">
-                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-                        <h3>Implementación Rápida</h3>
-                        <p>Nuestro proceso ágil nos permite desarrollar e integrar las soluciones en tiempo récord, para que veas resultados cuanto antes.</p>
+                    <div class="why-us-item">
+                        <div class="number">02.</div>
+                        <h3>Resultados Medibles</h3>
+                        <p>No vendemos humo. Nos centramos en entregar resultados tangibles: más ventas, menos costos operativos y clientes más satisfechos.</p>
                     </div>
-                    <div class="feature-item">
-                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <h3>Soporte Continuo</h3>
-                        <p>No desaparecemos tras la entrega. Ofrecemos soporte y mantenimiento para asegurar que tu solución de IA evolucione con tu negocio.</p>
+                    <div class="why-us-item">
+                        <div class="number">03.</div>
+                        <h3>Integración Sencilla</h3>
+                        <p>Nos encargamos de todo el proceso técnico. Integramos nuestras herramientas en tu flujo de trabajo actual sin complicaciones ni interrupciones.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ======================= SECCIÓN DE CONTACTO ======================= -->
-        <section id="contacto">
-            <div class="container">
-                <h2>Hablemos de tu Proyecto</h2>
-                <p class="section-subtitle">Completa el formulario y uno de nuestros especialistas se pondrá en contacto contigo para ofrecerte una asesoría gratuita.</p>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Tu Nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" rows="5" placeholder="Cuéntanos sobre tu negocio y tus necesidades..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Enviar Mensaje</button>
-                </form>
-            </div>
-        </section>
     </main>
 
     <!-- ======================= PIE DE PÁGINA ======================= -->
@@ -539,62 +429,67 @@
         </div>
     </footer>
 
-    <!-- ======================= CHAT FLOTANTE Y MODAL ======================= -->
-    <div class="chat-fab" id="openChat">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.15l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.15 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97zM6.75 8.25a.75.75 0 01.75-.75h9a.75.75 0 010 1.5h-9a.75.75 0 01-.75-.75zm.75 2.25a.75.75 0 000 1.5H12a.75.75 0 000-1.5H7.5z" clip-rule="evenodd" />
-        </svg>          
+    <!-- ======================= BOTÓN Y MODAL DE CHAT ======================= -->
+    <div class="chat-button" id="chat-open-button">
+        👉<span class="button-text">  ¿Hablemos de tu proyecto o dudas?</span>
     </div>
 
-    <div class="chat-modal" id="chatModal">
+    <div class="chat-modal-overlay" id="chat-modal">
         <div class="chat-modal-content">
             <div class="chat-modal-header">
                 <h4>Asistente Virtual ZamexIA</h4>
-                <button class="close-chat" id="closeChat">×</button>
+                <button class="chat-modal-close" id="chat-close-button">×</button>
             </div>
-            <iframe id="chat-iframe" src="http://35.226.84.232:5678/webhook/webchat-webhook-placeholder"></iframe>
+            <div id="chat-iframe-container">
+                <!-- El iframe se cargará aquí con JavaScript para evitar cargarlo innecesariamente en segundo plano -->
+            </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const openChatBtn = document.getElementById('chat-open-button');
+            const closeChatBtn = document.getElementById('chat-close-button');
+            const chatModal = document.getElementById('chat-modal');
+            const iframeContainer = document.getElementById('chat-iframe-container');
+            const iframeUrl = 'http://35.226.84.232:5678/webhook/webchat-webhook-placeholder';
+            let iframeLoaded = false;
 
-            // --- Lógica del menú móvil (hamburguesa) ---
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
-            
-            // Cierra el menú al hacer clic en un enlace
-            navLinks.forEach(link => link.addEventListener('click', () => {
-                 hamburger.classList.remove('active');
-                 navMenu.classList.remove('active');
-            }));
-
-            // --- Lógica del chat flotante ---
-            const openChatBtn = document.getElementById('openChat');
-            const closeChatBtn = document.getElementById('closeChat');
-            const chatModal = document.getElementById('chatModal');
-
-            openChatBtn.addEventListener('click', () => {
+            // Función para abrir el modal
+            const openModal = () => {
+                // Cargar el iframe solo la primera vez que se abre el modal
+                if (!iframeLoaded) {
+                    const iframe = document.createElement('iframe');
+                    iframe.id = 'chat-iframe';
+                    iframe.src = iframeUrl;
+                    iframeContainer.appendChild(iframe);
+                    iframeLoaded = true;
+                }
                 chatModal.classList.add('active');
-            });
+            };
 
-            closeChatBtn.addEventListener('click', () => {
+            // Función para cerrar el modal
+            const closeModal = () => {
                 chatModal.classList.remove('active');
-            });
+            };
 
-            // Opcional: Cerrar el modal al hacer clic fuera del contenido
-            chatModal.addEventListener('click', (e) => {
-                if (e.target === chatModal) {
-                    chatModal.classList.remove('active');
+            // Event Listeners
+            openChatBtn.addEventListener('click', openModal);
+            closeChatBtn.addEventListener('click', closeModal);
+            
+            // Cerrar al hacer clic en el fondo oscuro
+            chatModal.addEventListener('click', (event) => {
+                if (event.target === chatModal) {
+                    closeModal();
                 }
             });
 
+            // Cerrar con la tecla 'Escape'
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && chatModal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
         });
     </script>
 
