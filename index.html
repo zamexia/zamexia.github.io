@@ -1,394 +1,173 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZamexIA - Potencia tu Negocio con Inteligencia Estratégica</title>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZamexIA | Inteligencia Estratégica para tu Negocio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0e0e0e;
+      color: #ffffff;
+    }
 
-    <style>
-        /* --- 1. VARIABLES Y ESTILOS GLOBALES --- */
-        :root {
-            --bg-dark: #0a0a0a;
-            --bg-secondary: #171717;
-            --accent-cyan: #0891B2;
-            --accent-cyan-hover: #06B6D4;
-            --text-primary: #f5f5f5;
-            --text-secondary: #a3a3a3;
-            --border-color: #262626;
-        }
+    header {
+      background-color: #0e0e0e;
+      padding: 3em 1em;
+      text-align: center;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    header h1 {
+      font-size: 2.5em;
+      color: #ffffff;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    header span {
+      color: #00d0ff;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
-            line-height: 1.7;
-            font-size: 16px;
-        }
+    header p {
+      color: #cccccc;
+      margin-top: 0.5em;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+    .section {
+      padding: 3em 1em;
+      text-align: center;
+    }
 
-        section {
-            padding: 6rem 0;
-        }
+    .section h2 {
+      font-size: 2em;
+      margin-bottom: 1em;
+    }
 
-        h1, h2, h3 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2em;
+    }
 
-        h2 {
-            font-size: 2.8rem;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+    .card {
+      background-color: #1a1a1a;
+      padding: 2em;
+      border-radius: 10px;
+      width: 280px;
+    }
 
-        a {
-            color: var(--accent-cyan);
-            text-decoration: none;
-        }
+    .card h3 {
+      color: #00d0ff;
+      margin-bottom: 0.5em;
+    }
 
-        /* --- 2. ENCABEZADO Y NAVEGACIÓN --- */
-        .header {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            background-color: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-        }
+    .reasons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2em;
+    }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .reason {
+      width: 300px;
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-        .logo span {
-            color: var(--accent-cyan);
-        }
+    .reason h3 {
+      color: #00d0ff;
+    }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
+    footer {
+      text-align: center;
+      padding: 2em;
+      font-size: 0.9em;
+      color: #888;
+    }
 
-        .nav-link {
-            color: var(--text-secondary);
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-        .nav-link:hover {
-            color: var(--text-primary);
-        }
+    #chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #00d0ff;
+      color: black;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-        /* --- 3. SECCIÓN DE PRESENTACIÓN (HERO) --- */
-        #inicio {
-            padding-top: 10rem; /* Espacio para el header fijo */
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            background: linear-gradient(90deg, var(--text-primary) 70%, var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-content .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* --- 4. SECCIÓN DE SERVICIOS --- */
-        #servicios {
-            background-color: var(--bg-secondary);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background-color: var(--bg-dark);
-            padding: 2.5rem 2rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-cyan);
-        }
-        
-        .service-card .icon {
-            width: 48px;
-            height: 48px;
-            color: var(--accent-cyan);
-            margin-bottom: 1.5rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .service-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* --- 5. SECCIÓN "POR QUÉ ELEGIRNOS" --- */
-        .why-us-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .why-us-item {
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .why-us-item .number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--accent-cyan);
-            margin-bottom: 1rem;
-        }
-
-        .why-us-item h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .why-us-item p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* --- 6. BOTÓN FLOTANTE Y WEB CHAT --- */
-        .chat-button {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 101;
-            background-color: var(--accent-cyan);
-            color: var(--bg-dark);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(8, 145, 178, 0.4);
-            transition: all 0.3s ease;
-        }
-        .chat-button:hover {
-            background-color: var(--accent-cyan-hover);
-            transform: translateY(-3px);
-        }
-
-        .chat-container {
-            position: fixed;
-            bottom: 7rem;
-            right: 2rem;
-            width: 90%;
-            max-width: 400px;
-            height: 70vh;
-            max-height: 550px;
-            background-color: var(--bg-secondary);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            z-index: 102;
-            display: flex;
-            flex-direction: column;
-            
-            /* Animación y estado inicial */
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
-        }
-        
-        .chat-container.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        
-        #chat-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* --- 7. PIE DE PÁGINA --- */
-        .footer {
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-secondary);
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* --- 8. RESPONSIVE DESIGN --- */
-        @media (max-width: 768px) {
-            h2 { font-size: 2.2rem; }
-            .hero-content h1 { font-size: 2.5rem; }
-
-            .nav-menu { display: none; }
-            
-            .why-us-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .chat-button {
-                width: 60px;
-                height: 60px;
-                padding: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.5rem;
-            }
-            .chat-button .button-text {
-                display: none;
-            }
-
-            .chat-container {
-                bottom: 6rem;
-                right: 1.5rem;
-                left: 1.5rem;
-                width: auto;
-            }
-        }
-    </style>
+    #chat-iframe {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      border: none;
+      display: none;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00d0ff;
+    }
+  </style>
 </head>
 <body>
 
-    <header class="header">
-        <nav class="navbar container">
-            <a href="#inicio" class="logo">Zamex<span>IA</span></a>
-            <ul class="nav-menu">
-                <li><a href="#inicio" class="nav-link">Inicio</a></li>
-                <li><a href="#servicios" class="nav-link">Servicios</a></li>
-                <li><a href="#sobre" class="nav-link">Sobre ZamexIA</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>Potencia tu negocio <span>con inteligencia estratégica</span></h1>
+    <p>Automatizamos procesos, aumentamos tus ingresos y liberamos tu tiempo con soluciones inteligentes.</p>
+  </header>
 
-    <main>
-        <section id="inicio">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>Potencia tu negocio con inteligencia estratégica</h1>
-                    <p class="subtitle">Automatizamos procesos, aumentamos tus ingresos y liberamos tu tiempo con soluciones inteligentes.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="servicios">
-            <div class="container">
-                <h2>Soluciones para Crecer</h2>
-                <div class="services-grid">
-                    <div class="service-card"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><h3>Bots Personalizados</h3><p>Asistentes virtuales 24/7 que capturan leads y resuelven dudas al instante.</p></div>
-                    <div class="service-card"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.572L16.5 21.75l-.398-1.178a3.375 3.375 0 00-2.455-2.455L12.75 18l1.178-.398a3.375 3.375 0 002.455-2.455L16.5 14.25l.398 1.178a3.375 3.375 0 002.455 2.455L20.25 18l-1.178.398a3.375 3.375 0 00-2.455 2.455z" /></svg><h3>Automatización con IA</h3><p>Eliminamos tareas repetitivas para que tu equipo se concentre en crecer.</p></div>
-                    <div class="service-card"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v18h18V3H3.75zM8.25 9h7.5M8.25 13.5h3.75m-3.75 4.5h3.75m4.5-4.5h.008v.008h-.008v-.008zm0 4.5h.008v.008h-.008v-.008zm2.25-4.5h.008v.008h-.008V13.5zm0 4.5h.008v.008h-.008v-.008z" /></svg><h3>Análisis Estratégico</h3><p>Convertimos tus datos en decisiones inteligentes y oportunidades de negocio.</p></div>
-                    <div class="service-card"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg><h3>Atención Multicanal</h3><p>Integramos IA en tu Web, WhatsApp, Instagram y Facebook para unificar la experiencia.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="sobre">
-            <div class="container">
-                <h2>¿Por Qué Elegirnos?</h2>
-                <div class="why-us-grid">
-                    <div class="why-us-item"><div class="number">01.</div><h3>Enfoque en PYMES</h3><p>Entendemos los desafíos de las PYMES. Nuestras soluciones son asequibles, escalables y diseñadas para generar un impacto real.</p></div>
-                    <div class="why-us-item"><div class="number">02.</div><h3>Resultados Medibles</h3><p>Nos centramos en entregar resultados tangibles: más ventas, menos costos operativos y clientes más satisfechos.</p></div>
-                    <div class="why-us-item"><div class="number">03.</div><h3>Integración Sencilla</h3><p>Nos encargamos de todo. Integramos nuestras herramientas en tu flujo de trabajo actual sin complicaciones ni interrupciones.</p></div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer"><p>© 2024 ZamexIA. Todos los derechos reservados.</p></footer>
-
-    <!-- Botón flotante para el chat -->
-    <div class="chat-button" id="chat-toggle-button">
-        👉<span class="button-text">  ¿Hablemos de tu proyecto o dudas?</span>
+  <section class="section">
+    <h2>Soluciones para Crecer</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Bots Personalizados</h3>
+        <p>Asistentes virtuales que atienden a tus clientes 24/7, capturan leads y responden dudas al instante.</p>
+      </div>
+      <div class="card">
+        <h3>Automatización con IA</h3>
+        <p>Eliminamos tareas manuales y repetitivas para que tu equipo se concentre en lo que realmente importa.</p>
+      </div>
+      <div class="card">
+        <h3>Análisis Estratégico</h3>
+        <p>Convertimos tus datos en decisiones inteligentes para maximizar tu rentabilidad.</p>
+      </div>
     </div>
+  </section>
 
-    <!-- Contenedor del Web Chat (inicialmente oculto) -->
-    <div class="chat-container" id="chat-container">
-        <iframe 
-            id="chat-iframe"
-            src="http://35.226.84.232:5678/webhook/webchat-webhook-placeholder"
-            title="Web Chat de ZamexIA">
-        </iframe>
+  <section class="section">
+    <h2>¿Por Qué Elegirnos?</h2>
+    <div class="reasons">
+      <div class="reason">
+        <h3>01. Enfoque en PYMES</h3>
+        <p>Soluciones asequibles, escalables y efectivas, diseñadas para generar impacto real en tu empresa.</p>
+      </div>
+      <div class="reason">
+        <h3>02. Resultados Medibles</h3>
+        <p>Nos centramos en resultados reales: más ventas, menos costos y clientes más satisfechos.</p>
+      </div>
+      <div class="reason">
+        <h3>03. Integración Sencilla</h3>
+        <p>Nos encargamos de todo. Integramos IA en tu flujo actual sin complicaciones.</p>
+      </div>
     </div>
+  </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const chatToggleButton = document.getElementById('chat-toggle-button');
-            const chatContainer = document.getElementById('chat-container');
+  <footer>
+    © 2024 ZamexIA. Todos los derechos reservados.
+  </footer>
 
-            // Alternar la visibilidad del chat al hacer clic en el botón
-            chatToggleButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Evita que el clic se propague al documento
-                chatContainer.classList.toggle('active');
-            });
+  <!-- Chat Web Embed -->
+  <button id="chat-button">💬 ¿Hablemos de tu proyecto o dudas?</button>
+  <iframe id="chat-iframe" src="http://35.226.84.232:5678/webhook/webchat-webhook-placeholder"></iframe>
 
-            // Opcional: Cerrar el chat si se hace clic fuera de él
-            document.addEventListener('click', (event) => {
-                // Si el chat está activo y el clic NO fue dentro del contenedor del chat
-                if (chatContainer.classList.contains('active') && !chatContainer.contains(event.target)) {
-                    chatContainer.classList.remove('active');
-                }
-            });
-        });
-    </script>
+  <script>
+    const chatButton = document.getElementById('chat-button');
+    const chatIframe = document.getElementById('chat-iframe');
+
+    chatButton.addEventListener('click', () => {
+      chatIframe.style.display = chatIframe.style.display === 'none' ? 'block' : 'none';
+    });
+  </script>
 
 </body>
 </html>
