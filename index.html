@@ -79,6 +79,11 @@
         /* --- CONTENEDOR PRINCIPAL Y SECCIONES --- */
         main {
             padding-top: 80px; /* Espacio para el header fijo */
+            /* --- CAMBIO CLAVE AQUÍ (1 de 2) --- */
+            /* Añadimos position relative y z-index para crear un contexto de apilamiento para el contenido principal, 
+               colocándolo debajo del chat. */
+            position: relative;
+            z-index: 1;
         }
 
         .container {
@@ -183,11 +188,13 @@
         }
 
         /* --- CHAT FLOTANTE --- */
+        /* --- CAMBIO CLAVE AQUÍ (2 de 2) --- */
+        /* Aumentamos el z-index del chat para asegurar que esté por encima de todo */
         #chat-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 1001;
+            z-index: 1002; /* Aumentado para que el botón esté por encima de todo */
         }
 
         #chat-toggle-button {
@@ -221,7 +228,7 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-            z-index: 1000;
+            z-index: 1001; /* Aumentado para que la ventana del chat esté por encima */
         }
 
         #chat-iframe-wrapper.visible {
