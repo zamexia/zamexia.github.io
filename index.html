@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZamexIA | Inteligencia Estratégica para tu Negocio</title>
     <style>
-        /* --- VARIABLES Y ESTILOS GLOBALES --- */
         :root {
             --bg-color: #0c0c0e;
             --surface-color: #1a1d21;
@@ -33,7 +32,6 @@
             line-height: 1.6;
         }
 
-        /* --- ENCABEZADO Y NAVEGACIÓN --- */
         .main-header {
             position: fixed;
             top: 0;
@@ -76,14 +74,8 @@
             color: var(--accent-color-end);
         }
 
-        /* --- CONTENEDOR PRINCIPAL Y SECCIONES --- */
         main {
-            padding-top: 80px; /* Espacio para el header fijo */
-            /* --- CAMBIO CLAVE AQUÍ (1 de 2) --- */
-            /* Añadimos position relative y z-index para crear un contexto de apilamiento para el contenido principal, 
-               colocándolo debajo del chat. */
-            position: relative;
-            z-index: 1;
+            padding-top: 80px;
         }
 
         .container {
@@ -93,7 +85,6 @@
             text-align: center;
         }
 
-        /* --- SECCIÓN HERO --- */
         .hero {
             padding-top: 6rem;
             padding-bottom: 6rem;
@@ -117,7 +108,6 @@
             margin: 0 auto;
         }
 
-        /* --- SECCIÓN DE SERVICIOS Y "POR QUÉ ELEGIRNOS" --- */
         .section-title {
             font-size: clamp(2rem, 4vw, 2.5rem);
             margin-bottom: 3rem;
@@ -137,11 +127,16 @@
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; /* Añadido por buena práctica */
+            z-index: 1; /* Añadido por buena práctica */
         }
 
-        .card:hover {
+        /* --- CORRECCIÓN CSS DEFINITIVA --- */
+        /* Esta regla dice: aplica el efecto hover a la tarjeta SOLO SI el body NO tiene la clase 'chat-is-open' */
+        body:not(.chat-is-open) .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 30px rgba(0, 212, 255, 0.1);
+            z-index: 2; /* Asegura que la tarjeta activa se vea sobre sus hermanas */
         }
 
         .card-icon {
@@ -177,7 +172,6 @@
             flex-shrink: 0;
         }
 
-        /* --- PIE DE PÁGINA --- */
         .main-footer {
             text-align: center;
             padding: 2rem;
@@ -187,14 +181,11 @@
             font-size: 0.9rem;
         }
 
-        /* --- CHAT FLOTANTE --- */
-        /* --- CAMBIO CLAVE AQUÍ (2 de 2) --- */
-        /* Aumentamos el z-index del chat para asegurar que esté por encima de todo */
         #chat-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 1002; /* Aumentado para que el botón esté por encima de todo */
+            z-index: 2000;
         }
 
         #chat-toggle-button {
@@ -228,7 +219,7 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-            z-index: 1001; /* Aumentado para que la ventana del chat esté por encima */
+            z-index: 1999;
         }
 
         #chat-iframe-wrapper.visible {
@@ -243,10 +234,9 @@
             border: none;
         }
 
-        /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
             .main-nav {
-                display: none; /* Ocultar menú en móviles por simplicidad */
+                display: none;
             }
             .container {
                 padding: 3rem 1rem;
@@ -278,23 +268,17 @@
             <h2 class="section-title">Nuestras Soluciones</h2>
             <div class="grid">
                 <div class="card">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                    </svg>
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" /></svg>
                     <h3>Bots Personalizados</h3>
                     <p>Asistentes virtuales que atienden a tus clientes 24/7, capturan leads y responden dudas al instante.</p>
                 </div>
                 <div class="card">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
-                    </svg>
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" /></svg>
                     <h3>Automatización con IA</h3>
                     <p>Eliminamos tareas manuales y repetitivas para que tu equipo se concentre en lo que realmente importa.</p>
                 </div>
                 <div class="card">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-12a2.25 2.25 0 0 1-2.25-2.25V3.75m16.5 0v16.5h-16.5" />
-                    </svg>
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-12a2.25 2.25 0 0 1-2.25-2.25V3.75m16.5 0v16.5h-16.5" /></svg>
                     <h3>Análisis Estratégico</h3>
                     <p>Convertimos tus datos en decisiones inteligentes para maximizar tu rentabilidad.</p>
                 </div>
@@ -324,34 +308,43 @@
         <p>© 2024 ZamexIA. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- INICIO DEL CHAT WEB -->
     <div id="chat-container">
         <div id="chat-iframe-wrapper">
             <iframe id="chat-iframe" src="http://35.226.84.232:5678/webhook/webchat" title="Chat ZamexIA"></iframe>
         </div>
         <button id="chat-toggle-button">Hablemos de tu negocio, ¿qué dudas tienes?</button>
     </div>
-    <!-- FIN DEL CHAT WEB -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const chatToggleButton = document.getElementById('chat-toggle-button');
             const chatIframeWrapper = document.getElementById('chat-iframe-wrapper');
 
-            // Función para mostrar/ocultar el chat
+            function toggleChat(visible) {
+                // --- CORRECCIÓN JAVASCRIPT ---
+                // Añadimos o quitamos la clase 'chat-is-open' al body
+                // para controlar el estilo de las tarjetas desde CSS.
+                if (visible) {
+                    chatIframeWrapper.classList.add('visible');
+                    document.body.classList.add('chat-is-open');
+                } else {
+                    chatIframeWrapper.classList.remove('visible');
+                    document.body.classList.remove('chat-is-open');
+                }
+            }
+
             chatToggleButton.addEventListener('click', function(event) {
-                event.stopPropagation(); // Evita que el evento se propague al documento
-                chatIframeWrapper.classList.toggle('visible');
+                event.stopPropagation();
+                const isVisible = chatIframeWrapper.classList.contains('visible');
+                toggleChat(!isVisible);
             });
 
-            // Opcional: Cerrar el chat si se hace clic fuera de él
             document.addEventListener('click', function(event) {
-                if (chatIframeWrapper.classList.contains('visible') && !chatIframeWrapper.contains(event.target)) {
-                    chatIframeWrapper.classList.remove('visible');
+                if (chatIframeWrapper.classList.contains('visible') && !chatIframeWrapper.contains(event.target) && event.target !== chatToggleButton) {
+                    toggleChat(false);
                 }
             });
             
-            // Navegación suave para los enlaces del menú
             document.querySelectorAll('.main-nav a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
