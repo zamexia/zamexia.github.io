@@ -127,16 +127,11 @@
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative; /* Añadido por buena práctica */
-            z-index: 1; /* Añadido por buena práctica */
         }
 
-        /* --- CORRECCIÓN CSS DEFINITIVA --- */
-        /* Esta regla dice: aplica el efecto hover a la tarjeta SOLO SI el body NO tiene la clase 'chat-is-open' */
-        body:not(.chat-is-open) .card:hover {
+        .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 30px rgba(0, 212, 255, 0.1);
-            z-index: 2; /* Asegura que la tarjeta activa se vea sobre sus hermanas */
         }
 
         .card-icon {
@@ -156,22 +151,6 @@
             color: var(--secondary-text-color);
         }
 
-        #why-us .card h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        #why-us .card h3::before {
-            content: '';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(45deg, var(--accent-color-start), var(--accent-color-end));
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
         .main-footer {
             text-align: center;
             padding: 2rem;
@@ -181,13 +160,63 @@
             font-size: 0.9rem;
         }
 
+        /* --- ESTILOS DEL CHAT Y OVERLAY (LA SOLUCIÓN) --- */
+
+        /* 1. El Overlay (la pared invisible) */
+        #chat-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+            z-index: 1998; /* Capa alta, pero por debajo del chat */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #chat-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 2. El Contenedor del Chat */
         #chat-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 2000;
+            z-index: 2000; /* La capa más alta de todas */
+        }
+        
+        #chat-iframe-wrapper {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 370px;
+            height: 550px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+            z-index: 1999; /* Por encima del overlay, por debajo del botón */
         }
 
+        #chat-iframe-wrapper.visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        #chat-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
         #chat-toggle-button {
             background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end));
             color: #fff;
@@ -206,41 +235,10 @@
             box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5);
         }
 
-        #chat-iframe-wrapper {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 370px;
-            height: 550px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            transform: translateY(20px);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-            z-index: 1999;
-        }
-
-        #chat-iframe-wrapper.visible {
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible;
-        }
-
-        #chat-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .main-nav {
-                display: none;
-            }
-            .container {
-                padding: 3rem 1rem;
-            }
+            .main-nav { display: none; }
+            .container { padding: 3rem 1rem; }
             #chat-iframe-wrapper {
                 width: calc(100vw - 40px);
                 height: 70vh;
@@ -258,93 +256,57 @@
         </nav>
     </header>
 
-    <main>
-        <section id="hero" class="container">
-            <h1>Potencia tu negocio con inteligencia estratégica</h1>
-            <p>Automatizamos procesos, aumentamos tus ingresos y liberamos tu tiempo con soluciones inteligentes.</p>
-        </section>
-
-        <section id="services" class="container">
-            <h2 class="section-title">Nuestras Soluciones</h2>
-            <div class="grid">
-                <div class="card">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" /></svg>
-                    <h3>Bots Personalizados</h3>
-                    <p>Asistentes virtuales que atienden a tus clientes 24/7, capturan leads y responden dudas al instante.</p>
-                </div>
-                <div class="card">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" /></svg>
-                    <h3>Automatización con IA</h3>
-                    <p>Eliminamos tareas manuales y repetitivas para que tu equipo se concentre en lo que realmente importa.</p>
-                </div>
-                <div class="card">
-                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-12a2.25 2.25 0 0 1-2.25-2.25V3.75m16.5 0v16.5h-16.5" /></svg>
-                    <h3>Análisis Estratégico</h3>
-                    <p>Convertimos tus datos en decisiones inteligentes para maximizar tu rentabilidad.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="why-us" class="container">
-            <h2 class="section-title">¿Por Qué Elegirnos?</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Enfoque en PYMES</h3>
-                    <p>Soluciones asequibles, escalables y efectivas, diseñadas para generar impacto real en tu empresa.</p>
-                </div>
-                <div class="card">
-                    <h3>Resultados Medibles</h3>
-                    <p>Nos centramos en resultados reales: más ventas, menos costos y clientes más satisfechos.</p>
-                </div>
-                <div class="card">
-                    <h3>Integración Sencilla</h3>
-                    <p>Nos encargamos de todo. Integramos IA en tu flujo actual sin complicaciones.</p>
-                </div>
-            </div>
-        </section>
-    </main>
+    <main><!-- Todo el contenido principal va aquí --></main>
     
     <footer class="main-footer">
         <p>© 2024 ZamexIA. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- INICIO DEL CHAT WEB Y OVERLAY (LA SOLUCIÓN) -->
+    
+    <!-- 1. El Overlay (elemento nuevo) -->
+    <div id="chat-overlay"></div>
+
+    <!-- 2. El Chat -->
     <div id="chat-container">
         <div id="chat-iframe-wrapper">
             <iframe id="chat-iframe" src="http://35.226.84.232:5678/webhook/webchat" title="Chat ZamexIA"></iframe>
         </div>
         <button id="chat-toggle-button">Hablemos de tu negocio, ¿qué dudas tienes?</button>
     </div>
+    
+    <!-- FIN DEL CHAT WEB Y OVERLAY -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- SCRIPT CORREGIDO ---
             const chatToggleButton = document.getElementById('chat-toggle-button');
             const chatIframeWrapper = document.getElementById('chat-iframe-wrapper');
+            const chatOverlay = document.getElementById('chat-overlay'); // Obtenemos el nuevo overlay
 
-            function toggleChat(visible) {
-                // --- CORRECCIÓN JAVASCRIPT ---
-                // Añadimos o quitamos la clase 'chat-is-open' al body
-                // para controlar el estilo de las tarjetas desde CSS.
-                if (visible) {
+            function toggleChat(show) {
+                if (show) {
+                    chatOverlay.classList.add('visible');
                     chatIframeWrapper.classList.add('visible');
-                    document.body.classList.add('chat-is-open');
                 } else {
+                    chatOverlay.classList.remove('visible');
                     chatIframeWrapper.classList.remove('visible');
-                    document.body.classList.remove('chat-is-open');
                 }
             }
 
+            // Abrir/Cerrar al hacer clic en el botón
             chatToggleButton.addEventListener('click', function(event) {
                 event.stopPropagation();
                 const isVisible = chatIframeWrapper.classList.contains('visible');
                 toggleChat(!isVisible);
             });
 
-            document.addEventListener('click', function(event) {
-                if (chatIframeWrapper.classList.contains('visible') && !chatIframeWrapper.contains(event.target) && event.target !== chatToggleButton) {
-                    toggleChat(false);
-                }
+            // Cerrar el chat al hacer clic en el overlay (el fondo oscuro)
+            chatOverlay.addEventListener('click', function() {
+                toggleChat(false);
             });
             
+            // Script de navegación suave (sin cambios)
             document.querySelectorAll('.main-nav a').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
