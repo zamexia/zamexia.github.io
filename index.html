@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZamexIA | Inteligencia Estratégica para tu Negocio</title>
     <style>
+        /* --- VARIABLES Y ESTILOS GLOBALES --- */
         :root {
             --bg-color: #0c0c0e;
             --surface-color: #1a1d21;
@@ -23,6 +24,10 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--primary-text-color);
@@ -30,27 +35,139 @@
             line-height: 1.6;
         }
 
-        main, header, footer {
-            transition: filter 0.3s ease;
-        }
-
         body.chat-is-open main,
-        body.chat-is-open header,
+        body.chat-is-open .main-header,
         body.chat-is-open footer {
             filter: blur(4px) brightness(0.7);
         }
 
-        /* ESTILOS DE LA PÁGINA (Sin cambios) */
-        header { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background-color: rgba(12, 12, 14, 0.8); backdrop-filter: blur(10px); z-index: 999; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-text-color); text-decoration: none; }
-        .logo span { background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        main { padding-top: 80px; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; text-align: center; }
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.2; margin-bottom: 1rem; background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--secondary-text-color); max-width: 700px; margin: 0 auto; }
-        footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); color: var(--secondary-text-color); font-size: 0.9rem; }
+        /* --- DISEÑO DE LA PÁGINA --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: rgba(12, 12, 14, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: filter 0.3s ease;
+        }
 
-        /* --- NUEVOS ESTILOS PARA LA VENTANA DE CHAT PERSONALIZADA --- */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-text-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-nav a {
+            color: var(--primary-text-color);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .main-nav a:hover { color: var(--accent-color-end); }
+
+        main {
+            padding-top: 80px;
+            transition: filter 0.3s ease;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero {
+            padding: 6rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--secondary-text-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 3rem;
+            color: var(--primary-text-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            color: var(--accent-color-end);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-text-color);
+        }
+
+        .card p {
+            color: var(--secondary-text-color);
+        }
+
+        .main-footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+            transition: filter 0.3s ease;
+        }
+
+        /* --- ESTILOS DE LA INTERFAZ DE CHAT --- */
         #chat-toggle-button {
             position: fixed;
             bottom: 20px;
@@ -90,114 +207,90 @@
             visibility: visible;
         }
 
-        .chat-header {
-            padding: 1rem;
-            background-color: rgba(0,0,0,0.2);
-            font-weight: bold;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .chat-messages {
-            flex-grow: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .message {
-            padding: 0.6rem 1rem;
-            border-radius: 18px;
-            max-width: 80%;
-            line-height: 1.4;
-        }
-
-        .message.bot {
-            background-color: var(--bot-message-bg);
-            color: var(--primary-text-color);
-            align-self: flex-start;
-            border-bottom-left-radius: 4px;
-        }
-
-        .message.user {
-            background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end));
-            color: #fff;
-            align-self: flex-end;
-            border-bottom-right-radius: 4px;
-        }
-        
-        .typing-indicator {
-            display: none;
-            align-items: center;
-            padding: 0.6rem 1rem;
-        }
-        .typing-indicator span {
-            height: 8px; width: 8px; margin: 0 2px;
-            background-color: var(--secondary-text-color);
-            border-radius: 50%; display: inline-block;
-            animation: bounce 1.4s infinite ease-in-out both;
-        }
+        .chat-header { padding: 1rem; background-color: rgba(0,0,0,0.2); font-weight: bold; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .chat-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; }
+        .message { padding: 0.6rem 1rem; border-radius: 18px; max-width: 80%; line-height: 1.4; }
+        .message.bot { background-color: var(--bot-message-bg); color: var(--primary-text-color); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .message.user { background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end)); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .typing-indicator { display: none; align-items: center; padding: 0.6rem 1rem; }
+        .typing-indicator span { height: 8px; width: 8px; margin: 0 2px; background-color: var(--secondary-text-color); border-radius: 50%; display: inline-block; animation: bounce 1.4s infinite ease-in-out both; }
         .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
         .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1.0); }
-        }
-
-        .chat-input-form {
-            display: flex;
-            padding: 0.75rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        #chat-input {
-            flex-grow: 1;
-            border: none;
-            background-color: transparent;
-            padding: 0.75rem;
-            color: var(--primary-text-color);
-            font-size: 1rem;
-        }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+        .chat-input-form { display: flex; padding: 0.75rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        #chat-input { flex-grow: 1; border: none; background-color: transparent; padding: 0.75rem; color: var(--primary-text-color); font-size: 1rem; }
         #chat-input:focus { outline: none; }
         #chat-input::placeholder { color: var(--secondary-text-color); }
-
-        #send-button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        #send-button { background-color: transparent; border: none; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; justify-content: center; }
         #send-button svg { width: 24px; height: 24px; color: var(--accent-color-end); }
         #send-button:disabled svg { color: var(--secondary-text-color); }
 
+        /* RESPONSIVE */
         @media (max-width: 768px) {
+            .main-nav { display: none; }
             #chat-window { width: calc(100vw - 40px); height: calc(100vh - 120px); max-height: 600px; }
         }
     </style>
 </head>
 <body>
 
-    <header><!-- Contenido del header --></header>
-    <main><!-- Contenido principal --></main>
-    <footer><!-- Contenido del footer --></footer>
+    <header class="main-header">
+        <a href="#" class="logo">Zamex<span>IA</span></a>
+        <nav class="main-nav">
+            <a href="#services">Servicios</a>
+            <a href="#why-us">Por Qué Elegirnos</a>
+        </nav>
+    </header>
 
-    <!-- INICIO DEL CHAT FLOTANTE -->
+    <main>
+        <section id="hero" class="container">
+            <h1>Potencia tu negocio con inteligencia estratégica</h1>
+            <p>Automatizamos procesos, aumentamos tus ingresos y liberamos tu tiempo con soluciones inteligentes.</p>
+        </section>
+
+        <section id="services" class="container">
+            <h2 class="section-title">Nuestras Soluciones</h2>
+            <div class="grid">
+                <div class="card">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" /></svg>
+                    <h3>Bots Personalizados</h3>
+                    <p>Asistentes virtuales que atienden a tus clientes 24/7, capturan leads y responden dudas al instante.</p>
+                </div>
+                <div class="card">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" /></svg>
+                    <h3>Automatización con IA</h3>
+                    <p>Eliminamos tareas manuales y repetitivas para que tu equipo se concentre en lo que realmente importa.</p>
+                </div>
+                <div class="card">
+                    <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-12a2.25 2.25 0 0 1-2.25-2.25V3.75m16.5 0v16.5h-16.5" /></svg>
+                    <h3>Análisis Estratégico</h3>
+                    <p>Convertimos tus datos en decisiones inteligentes para maximizar tu rentabilidad.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-us" class="container">
+            <h2 class="section-title">¿Por Qué Elegirnos?</h2>
+            <div class="grid">
+                <div class="card"><h3>Enfoque en PYMES</h3><p>Soluciones asequibles, escalables y efectivas, diseñadas para generar impacto real en tu empresa.</p></div>
+                <div class="card"><h3>Resultados Medibles</h3><p>Nos centramos en resultados reales: más ventas, menos costos y clientes más satisfechos.</p></div>
+                <div class="card"><h3>Integración Sencilla</h3><p>Nos encargamos de todo. Integramos IA en tu flujo actual sin complicaciones.</p></div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <p>© 2024 ZamexIA. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- INICIO DEL CHAT FLOTANTE PERSONALIZADO -->
     <div id="chat-widget-container">
-        <!-- 1. La ventana de chat (inicialmente oculta) -->
         <div id="chat-window">
             <div class="chat-header">ZamexIA</div>
             <div class="chat-messages">
-                <!-- Los mensajes se insertarán aquí con JS -->
                 <div class="message bot">Hola, soy ZamexIA. ¿En qué puedo ayudarte hoy?</div>
             </div>
-            <div class="typing-indicator">
-                <span></span><span></span><span></span>
-            </div>
+            <div class="typing-indicator"><span></span><span></span><span></span></div>
             <form class="chat-input-form" id="chat-form">
                 <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." autocomplete="off">
                 <button type="submit" id="send-button" title="Enviar mensaje">
@@ -205,10 +298,9 @@
                 </button>
             </form>
         </div>
-        <!-- 2. El botón para abrir/cerrar el chat -->
         <button id="chat-toggle-button">Hablemos de tu negocio</button>
     </div>
-    <!-- FIN DEL CHAT FLOTANTE -->
+    <!-- FIN DEL CHAT FLOTANTE PERSONALIZADO -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -221,34 +313,24 @@
             const messagesContainer = document.querySelector('.chat-messages');
             const typingIndicator = document.querySelector('.typing-indicator');
 
-            // --- URL DEL WEBHOOK ---
             const WEBHOOK_URL = 'http://35.226.84.232:5678/webhook/webchat';
 
-            // --- FUNCIONES ---
-
-            // Función para mostrar/ocultar el chat
             function toggleChat(show) {
                 const isVisible = chatWindow.classList.contains('visible');
-                if (show === undefined) {
-                    show = !isVisible; // Si no se especifica, invierte el estado actual
-                }
+                if (show === undefined) { show = !isVisible; }
                 chatWindow.classList.toggle('visible', show);
                 document.body.classList.toggle('chat-is-open', show);
             }
 
-            // Función para añadir un mensaje a la UI
             function addMessage(text, sender) {
                 const messageElement = document.createElement('div');
-                messageElement.classList.add('message', sender); // sender será 'user' o 'bot'
+                messageElement.classList.add('message', sender);
                 messageElement.textContent = text;
                 messagesContainer.appendChild(messageElement);
-                // Auto-scroll al último mensaje
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             }
 
-            // Función para enviar el mensaje al Webhook
             async function sendMessageToBot(messageText) {
-                // Deshabilitar input y mostrar "escribiendo..."
                 chatInput.disabled = true;
                 sendButton.disabled = true;
                 typingIndicator.style.display = 'flex';
@@ -257,9 +339,7 @@
                 try {
                     const response = await fetch(WEBHOOK_URL, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             source: 'web',
                             phone: 'cliente_web',
@@ -267,24 +347,16 @@
                         })
                     });
 
-                    if (!response.ok) {
-                        throw new Error(`Error HTTP: ${response.status}`);
-                    }
+                    if (!response.ok) { throw new Error(`Error HTTP: ${response.status}`); }
 
                     const data = await response.json();
-                    
-                    // --- AJUSTA ESTA LÍNEA SI ES NECESARIO ---
-                    // Asumimos que la respuesta del bot viene en una propiedad llamada 'reply'.
-                    // Si tu API la devuelve con otro nombre (ej: 'message', 'response'), cámbialo aquí.
                     const botReply = data.reply || "No he podido procesar tu solicitud.";
-                    
                     addMessage(botReply, 'bot');
 
                 } catch (error) {
                     console.error('Error al contactar con el webhook:', error);
                     addMessage('Lo siento, ha ocurrido un error de conexión. Inténtalo de nuevo más tarde.', 'bot');
                 } finally {
-                    // Volver a habilitar el input
                     typingIndicator.style.display = 'none';
                     chatInput.disabled = false;
                     sendButton.disabled = false;
@@ -292,16 +364,11 @@
                 }
             }
             
-            // --- EVENT LISTENERS ---
-
-            // Abrir/cerrar el chat con el botón flotante
             chatToggleButton.addEventListener('click', () => toggleChat());
 
-            // Enviar el formulario
             chatForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const messageText = chatInput.value.trim();
-
                 if (messageText) {
                     addMessage(messageText, 'user');
                     sendMessageToBot(messageText);
@@ -309,6 +376,15 @@
                 }
             });
 
+            // Navegación suave para los enlaces del menú
+            document.querySelectorAll('.main-nav a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
         });
     </script>
 
