@@ -377,7 +377,7 @@
     </div>
 
     <script>
-        // --- LÓGICA DEL CHAT FLOTANTE ---
+        // --- LÓGICA DEL CHAT FLOTANTE (VISIBILIDAD) ---
         const chatToggle = document.getElementById('chat-toggle');
         const chatWidget = document.getElementById('chat-widget');
         const chatCloseBtn = document.getElementById('chat-close-btn');
@@ -395,6 +395,7 @@
         const userInput = document.getElementById('userInput');
         const chatMessages = document.getElementById('chatMessages');
         
+        const sessionId = crypto.randomUUID();
         const WEBHOOK_URL = 'https://zamex.35.226.84.232.sslip.io/webhook/webchat';
 
         chatForm.addEventListener('submit', function(event) {
@@ -420,22 +421,25 @@
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ "sender": "web-user", "message": userMessage })
+                    body: JSON.stringify({ 
+                        "chatInput": userMessage, 
+                        "sessionId": sessionId 
+                    })
                 });
 
                 if (!response.ok) {
                     throw new Error(`Error del servidor: ${response.status}`);
                 }
 
-                const botResponses = await response.json();
+                const botResponse = await response.json();
 
-                if (Array.isArray(botResponses)) {
-                    botResponses.forEach(res => {
-                        if (res.text) {
-                            addMessage(res.text, 'bot-message');
-                        }
-                    });
+                if (botResponse.answer) {
+                    addMessage(botResponse.answer, 'bot-message');
+                } else {
+                    addMessage("Recibí una respuesta, pero no pude interpretarla.", 'bot-message');
+                    console.log("Respuesta recibida pero sin campo 'answer':", botResponse);
                 }
+
             } catch (error) {
                 console.error('Error al contactar el webhook:', error);
                 addMessage('Lo siento, no pude conectarme con el asistente. Inténtalo más tarde.', 'bot-message');
