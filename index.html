@@ -3,178 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Chat con Webhook</title>
+    <title>ZamexIA - Inteligencia Artificial Estratégica</title>
+    
+    <!-- Google Fonts: Exo 2 para un toque futurista, Inter para legibilidad -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
     <style>
+        /* --- RESET Y CONFIGURACIÓN GLOBAL --- */
+        :root {
+            --bg-dark: #0F0F1A; /* Fondo principal muy oscuro */
+            --bg-light-dark: #1A1A2E; /* Fondo para elementos elevados como cards */
+            --accent-violet: #8A2BE2; /* Violeta azulado principal */
+            --accent-blue: #4F46E5; /* Un azul más eléctrico para gradientes */
+            --text-primary: #F0F0F8; /* Texto principal casi blanco */
+            --text-secondary: #A0A0B0; /* Texto secundario grisáceo */
+            --border-color: rgba(138, 43, 226, 0.2); /* Borde sutil con el color de acento */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* --- ENCABEZADO FIJO --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 15, 26, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.8em;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        /* --- SECCIONES PRINCIPALES --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 120px 20px 80px;
+            text-align: center;
+        }
+
+        /* --- SECCIÓN HERO --- */
+        #hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at 50% -20%, rgba(79, 70, 229, 0.2), transparent 80%), var(--bg-dark);
+        }
+
+        .hero-content h1 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem); /* Tamaño de fuente adaptable */
+            font-weight: 700;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--accent-violet), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        /* --- SECCIÓN PRESENTACIÓN (ABOUT) --- */
+        #about p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+        }
+        #about strong {
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+        
+        /* --- BLOQUES DE VALOR (SERVICES) --- */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .value-card {
+            background-color: var(--bg-light-dark);
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 20px var(--border-color);
+        }
+
+        .value-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-violet);
+        }
+
+        .value-card h3 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        /* --- SECCIÓN DIFERENCIADORA --- */
+        #differentiator {
+            background-color: var(--bg-light-dark);
+            padding: 80px 20px;
+        }
+
+        #differentiator blockquote {
+            max-width: 900px;
+            margin: 0 auto;
+            font-family: 'Exo 2', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            line-height: 1.4;
+            border-left: 4px solid var(--accent-violet);
+            padding-left: 40px;
+            text-align: left;
+        }
+        
+        /* --- CHAT FLOTANTE --- */
+        #chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-violet), var(--accent-blue));
+            color: white;
+            border-radius: 50%;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 1001;
+            transition: transform 0.3s ease;
         }
-        .chat-container {
-            width: 400px;
-            height: 600px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        #chat-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .chat-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 370px;
+            max-width: 90vw;
+            height: 550px;
+            max-height: 70vh;
+            background-color: var(--bg-light-dark);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
             display: flex;
             flex-direction: column;
-            background-color: #fff;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            z-index: 1000;
+            
+            /* Animación de entrada/salida */
+            transform: scale(0.95) translateY(10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-out;
         }
+
+        .chat-widget.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
         .chat-header {
-            background-color: #007bff;
-            color: white;
-            padding: 15px;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            text-align: center;
-            font-size: 1.2em;
+            background: rgba(15, 15, 26, 0.8);
+            color: var(--text-primary);
+            padding: 15px 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
         }
+        
+        .chat-header .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
         .chat-messages {
             flex-grow: 1;
             padding: 20px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
+
         .message {
             padding: 10px 15px;
             border-radius: 18px;
-            max-width: 75%;
-            line-height: 1.4;
+            max-width: 80%;
+            line-height: 1.5;
+            word-wrap: break-word;
         }
         .user-message {
-            background-color: #007bff;
+            background-color: var(--accent-blue);
             color: white;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
         }
         .bot-message {
-            background-color: #e9e9eb;
-            color: #333;
+            background-color: #33334a;
+            color: var(--text-primary);
             align-self: flex-start;
             border-bottom-left-radius: 4px;
         }
+
         .chat-input-form {
             display: flex;
-            border-top: 1px solid #ccc;
+            padding: 10px;
+            border-top: 1px solid var(--border-color);
         }
-        #userInput {
+        .chat-input-form input {
             flex-grow: 1;
-            border: none;
-            padding: 15px;
-            font-size: 1em;
+            background-color: var(--bg-dark);
+            border: 1px solid #33334a;
+            border-radius: 20px;
+            padding: 10px 15px;
+            color: var(--text-primary);
             outline: none;
         }
-        #sendButton {
-            background-color: #007bff;
-            color: white;
+        .chat-input-form button {
+            background: var(--accent-blue);
             border: none;
-            padding: 0 20px;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
             cursor: pointer;
-            font-size: 1.2em;
-        }
-        #sendButton:hover {
-            background-color: #0056b3;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
-<div class="chat-container">
-    <div class="chat-header">
-        Asistente Virtual
-    </div>
-    <div class="chat-messages" id="chatMessages">
-        <!-- Los mensajes aparecerán aquí -->
-        <div class="message bot-message">¡Hola! ¿En qué puedo ayudarte hoy?</div>
-    </div>
-    <form class="chat-input-form" id="chatForm">
-        <input type="text" id="userInput" placeholder="Escribe tu mensaje..." autocomplete="off">
-        <button type="submit" id="sendButton">►</button>
-    </form>
-</div>
+    <header>
+        <a href="#" class="logo">ZamexIA</a>
+        <nav>
+            <a href="#about">Presentación</a>
+            <a href="#services">Capacidades</a>
+            <a href="#differentiator">Filosofía</a>
+        </nav>
+    </header>
 
-<script>
-    const chatForm = document.getElementById('chatForm');
-    const userInput = document.getElementById('userInput');
-    const chatMessages = document.getElementById('chatMessages');
-    const sendButton = document.getElementById('sendButton');
-    
-    // URL del webhook que me proporcionaste
-    const WEBHOOK_URL = 'https://zamex.35.226.84.232.sslip.io/webhook/webchat';
+    <main>
+        <!-- SECCIÓN HERO -->
+        <section id="hero">
+            <div class="hero-content container">
+                <h1>Pensamiento Crítico + IA = Transformación Real</h1>
+            </div>
+        </section>
 
-    // Evento para enviar el mensaje al presionar Enter o el botón
-    chatForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Evita que la página se recargue
-        const messageText = userInput.value.trim();
+        <!-- SECCIÓN PRESENTACIÓN -->
+        <section id="about" class="container">
+            <p><strong>ZamexIA no es un proveedor técnico.</strong> Somos un aliado estratégico que fusiona la profundidad de la filosofía y el análisis estructural con el poder de la inteligencia artificial para rediseñar su empresa desde sus fundamentos. </p>
+        </section>
         
-        if (messageText !== '') {
-            // Muestra el mensaje del usuario en el chat
-            addMessage(messageText, 'user-message');
-            
-            // Limpia el campo de entrada
-            userInput.value = '';
-            
-            // Envía el mensaje al webhook
-            sendMessageToBot(messageText);
-        }
-    });
-
-    function addMessage(text, className) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message', className);
-        messageDiv.textContent = text;
-        chatMessages.appendChild(messageDiv);
+        <!-- SECCIÓN BLOQUES DE VALOR -->
+        <section id="services" class="container">
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="icon">🧠</div>
+                    <h3>Diagnóstico Filosófico</h3>
+                    <p>Analizamos el "porqué" de sus operaciones, identificando los axiomas y sesgos estructurales que limitan su potencial.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon">⚙️</div>
+                    <h3>Automatización Inteligente</h3>
+                    <p>Implementamos sistemas de IA que no solo ejecutan tareas, sino que aprenden y se adaptan a la lógica central de su negocio.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon">📈</div>
+                    <h3>Optimización Operativa</h3>
+                    <p>Utilizamos modelos predictivos para refinar procesos, minimizar ineficiencias y maximizar la coherencia estratégica.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon">🧭</div>
+                    <h3>Toma de Decisiones con IA</h3>
+                    <p>Desarrollamos frameworks que integran análisis de datos masivos para apoyar decisiones directivas complejas y de alto impacto.</p>
+                </div>
+            </div>
+        </section>
         
-        // Desplaza el scroll hacia el último mensaje
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
+        <!-- SECCIÓN DIFERENCIADORA -->
+        <section id="differentiator">
+            <div class="container">
+                <blockquote>ZamexIA no instala bots. Reconstruye estructuras. <br>Pensamos <strong>con</strong> IA, no <strong>para</strong> la IA.</blockquote>
+            </div>
+        </section>
+    </main>
 
-    async function sendMessageToBot(userMessage) {
-        try {
-            const response = await fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    // El formato del cuerpo puede variar.
-                    // Comúnmente es un objeto con una clave "message" o "sender" y "message".
-                    // Ajusta esto si tu backend espera un formato diferente.
-                    "sender": "user",
-                    "message": userMessage
-                })
-            });
+    <!-- CHAT FLOTANTE -->
+    <button id="chat-toggle" title="Abrir Chat">💬</button>
+    <div class="chat-widget" id="chat-widget">
+        <div class="chat-header">
+            <span>Asistente ZamexIA</span>
+            <button class="close-btn" id="chat-close-btn">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">💬 Hablemos de tu empresa. Estoy listo para escuchar.</div>
+        </div>
+        <form class="chat-input-form" id="chatForm">
+            <input type="text" id="userInput" placeholder="Escribe tu mensaje..." autocomplete="off">
+            <button type="submit" title="Enviar">➤</button>
+        </form>
+    </div>
 
-            if (!response.ok) {
-                throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+    <script>
+        // --- LÓGICA DEL CHAT FLOTANTE ---
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatWidget = document.getElementById('chat-widget');
+        const chatCloseBtn = document.getElementById('chat-close-btn');
+
+        chatToggle.addEventListener('click', () => {
+            chatWidget.classList.toggle('open');
+        });
+
+        chatCloseBtn.addEventListener('click', () => {
+            chatWidget.classList.remove('open');
+        });
+        
+        // --- LÓGICA DE CONEXIÓN DEL WEBHOOK ---
+        const chatForm = document.getElementById('chatForm');
+        const userInput = document.getElementById('userInput');
+        const chatMessages = document.getElementById('chatMessages');
+        
+        const WEBHOOK_URL = 'https://zamex.35.226.84.232.sslip.io/webhook/webchat';
+
+        chatForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const messageText = userInput.value.trim();
+            if (messageText) {
+                addMessage(messageText, 'user-message');
+                userInput.value = '';
+                sendMessageToBot(messageText);
             }
+        });
 
-            const botResponses = await response.json();
+        function addMessage(text, className) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', className);
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
 
-            // Tu webhook puede devolver una lista de mensajes.
-            // Los procesamos uno por uno.
-            if (Array.isArray(botResponses)) {
-                botResponses.forEach(res => {
-                    // Asumimos que la respuesta del bot tiene un campo "text".
-                    // Ajusta "res.text" si tu backend devuelve otro formato (ej: res.response).
-                    if (res.text) {
-                        addMessage(res.text, 'bot-message');
-                    }
+        async function sendMessageToBot(userMessage) {
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "sender": "web-user", "message": userMessage })
                 });
+
+                if (!response.ok) {
+                    throw new Error(`Error del servidor: ${response.status}`);
+                }
+
+                const botResponses = await response.json();
+
+                if (Array.isArray(botResponses)) {
+                    botResponses.forEach(res => {
+                        if (res.text) {
+                            addMessage(res.text, 'bot-message');
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error al contactar el webhook:', error);
+                addMessage('Lo siento, no pude conectarme con el asistente. Inténtalo más tarde.', 'bot-message');
             }
-
-        } catch (error) {
-            console.error('Error al contactar el webhook:', error);
-            addMessage('Lo siento, no pude conectarme con el asistente. Inténtalo más tarde.', 'bot-message');
         }
-    }
-</script>
-
+    </script>
 </body>
 </html>
