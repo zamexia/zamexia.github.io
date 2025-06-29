@@ -438,47 +438,47 @@
             appendMessage('Hablemos de tu empresa. Estoy listo para escucharte.', 'ai-message');
             
             // --- FUNCIÓN PRINCIPAL PARA ENVIAR MENSAJES (ASÍNCRONA) ---
-            const enviar mensaje = async () => {
-                const mensaje de usuario = entrada de usuario.valor.trim();
-                si (mensaje de usuario === '') retorno;
+            const sendMessage = async () => {
+                const userMessage = userInput.value.trim();
+                if (userMessage === '') return;
 
-                agregar mensaje(mensaje de usuario, 'mensaje de usuario');
-                entrada de usuario.valor = '';
+                appendMessage(userMessage, 'user-message');
+                userInput.value = '';
 
-                intentar {
-                    const respuesta = await fetch(URL del webhook, {
-                        método: 'POST',
-                        encabezados: {
-                            'Tipo de contenido': 'aplicación/json'
+                try {
+                    const response = await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
                         },
-                        cuervo: JSON.stringify({ texto: mensaje de usuario }) // El mensaje debe estar en la propiedad 'texto'
+                        body: JSON.stringify({ text: userMessage }) // El mensaje debe estar en la propiedad 'text'
                     });
 
-                    si (!respuesta.ok) {
-                        lanzar nuevo Error(`¡Error HTTP! estado: ${respuesta.estatus}`);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
 
-                    const datos = await respuesta.json();
+                    const data = await response.json();
                     
                     // Ruta específica para extraer el texto de la respuesta de tu webhook n8n/Gemini
-                    const aiTexto = datos.candidatos[0].contenido.partes[0].texto;
+                    const aiText = data.candidates[0].content.parts[0].text;
 
-                    agregar mensaje(aiTexto, 'mensaje-ai');
+                    appendMessage(aiText, 'ai-message');
 
-                } atrapar (error) {
-                    consola.error('Error al contactar al asistente:', error);
-                    agregar mensaje('Lo siento, hubo un problema de conexión. Por favor, intención de nuevo más tarde.', 'mensaje-ai');
+                } catch (error) {
+                    console.error('Error al contactar al asistente:', error);
+                    appendMessage('Lo siento, hubo un problema de conexión. Por favor, intenta de nuevo más tarde.', 'ai-message');
                 }
             };
 
-            // --- OYENTES DE EVENTOS ---
-            enviar botón.addEventListener('clic', enviar mensaje);
-            entrada de usuario.addEventListener('pulsación de tecla', (evento) => {
-                si (evento.clave === 'Entrar') {
-                    enviar mensaje();
+            // --- EVENT LISTENERS ---
+            sendButton.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    sendMessage();
                 }
             });
         });
     </script>
-</cuervo>
+</body>
 </html>
