@@ -38,7 +38,6 @@
             color: var(--color-text);
             font-family: var(--font-body);
             line-height: 1.6;
-            /* Se mantiene overflow-x: hidden para evitar scroll horizontal no deseado en el contenido principal */
             overflow-x: hidden; 
         }
 
@@ -51,19 +50,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
+            padding: 15px 5%; /* Reducido un poco el padding para que el logo se ajuste mejor */
             background-color: rgba(12, 12, 30, 0.8);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 1000;
             transition: background-color 0.3s ease;
         }
-
-        .logo {
-            font-family: var(--font-logo);
-            font-size: 2em;
-            color: var(--color-text);
-            text-shadow: 0 0 5px var(--color-primary), 0 0 10px var(--color-secondary);
+        
+        /* --- Estilo para el logo en imagen (NUEVO) --- */
+        .logo-img {
+            height: 45px; /* Altura del logo */
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
         }
 
         nav a {
@@ -214,7 +216,7 @@
         
         /* --- Responsividad --- */
         @media (max-width: 768px) {
-            .logo { font-size: 1.5em; }
+            .logo-img { height: 35px; } /* Logo más pequeño en móviles */
             nav { display: none; }
             .hero-section h1 { font-size: 2.5rem; }
             .content-section h2 { font-size: 2rem; }
@@ -223,12 +225,12 @@
             .action-btn { font-size: 12px; padding: 8px 15px; }
         }
 
-        /* --- ESTILOS DE BOTONES DE ACCIÓN FIJOS (CORREGIDO) --- */
+        /* --- ESTILOS DE BOTONES DE ACCIÓN FIJOS --- */
         .fixed-action-buttons {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            z-index: 1010; /* Aumentado para máxima prioridad */
+            z-index: 1010;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
@@ -255,9 +257,8 @@
             box-shadow: 0 8px 20px rgba(142, 45, 226, 0.5);
         }
 
-        /* --- ESTILOS DEL CHAT INTERACTIVO (CORREGIDO) --- */
+        /* --- ESTILOS DEL CHAT INTERACTIVO --- */
         .chat-bubble {
-            /* Ya no tiene position: fixed. Su posición la controla el div padre .fixed-action-buttons */
             background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
             color: white;
             width: 60px;
@@ -290,7 +291,7 @@
             opacity: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
             transform-origin: bottom right;
-            z-index: 1009; /* Ligeramente por debajo de los botones, pero por encima de todo lo demás */
+            z-index: 1009;
             visibility: hidden;
         }
 
@@ -382,7 +383,12 @@
 <body>
 
     <header>
-        <div class="logo">ZamexIA</div>
+        <!-- Logo con imagen (MODIFICADO) -->
+        <div class="logo">
+            <a href="#inicio">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYIAAABDCAMAAAAiG1wzAAAAGFBMVEUAAADgAADwPT3/Li76HiD2T1L/Q0b////tza2iAAAAAXRSTlMAQObYZgAAAvBJREFUeNrt3d1yGjAUhlETcAM49P+/dpChJtoqMcsS3e2dZ37iSSbJECmKL78nEImAcNf12bEwA/EE4r18fr8fEIAAYgRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBH4uEOsH8V7+4/P7/Z0wP3/eP1/M0/n18z/fXzO8959//y/Mj38WkP35i8P8+fP8WWD+vj8vAIkQiBGIEegvED+8P8zP9+/3M/3+fD/s/jA/v1/M8/v3e2F++d9fYH79HxgQXyAIkQiBGIE4gQcE4p/vD/Pz+w/Mz/f39+c9kH5/v+wPzO/3d2F++R+YkN9fIEIiBGIE4gQeEIg/3j/Mz/f394P5/X6+v++H+f39yfx8/1+Y/+o/kBD/XyBCIgRiBOIEnv+P+f39wfx+vzD/eP8gPz/f3x+Y39/vD+b3+ysQIf8BQSKEEYgRuEf94f1hfr+/P5g/3j/Iz/f3R+Lz+zvx+f2d+Pz+Tnx+/yZ+vz/x+f2b+P1+Y/+eBJIggABGBGIE4gT+EyB+vj8wn9/fCebn+/v9wX5/PzB/vz+Y3x/M7w/m9w/mD4T4I4TEEYgRiBP4/0GE+P3+QPx+fzB+v18Qj98vCEfvFwSj9/vD+Hn/ID+RXyAQkQiBGIE4gQcE4vf7w/z+/mB+v78/nJ/f34/m5/fH8/P74/n5/fH8/P64/nC+/AEhkQiBGIE4gT8QiN/vD+b398fz8/tj+fn98fz8/jj+cH88f7g/nj/cH88f7o/nj/eP9+fz+/Pz+wvEGxAIiQiBGIE4gQcE4q/3l32E+Gk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/IeIv/wEwS9U2s9r20gAAAABJRU5ErkJggg==" alt="Logo de ZamexIA" class="logo-img">
+            </a>
+        </div>
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#enfoque">Enfoque</a>
@@ -434,17 +440,11 @@
         <p>Contáctanos a través de nuestro chat interactivo.</p>
     </footer>
 
-    <!-- ESTRUCTURA DEL CHAT Y BOTONES FIJOS (CORREGIDO) -->
-    <!-- Este div se coloca justo antes de cerrar el body para evitar conflictos de "overflow" -->
+    <!-- ESTRUCTURA DEL CHAT Y BOTONES FIJOS -->
     <div class="fixed-action-buttons">
         
-        <!-- Botón de Catálogo -->
         <a href="https://zamexia.kyte.site" target="_blank" rel="noopener noreferrer" class="action-btn">mira nuestro catalogo y compra en linea</a>
-
-        <!-- Botón de WhatsApp -->
         <a href="https://wa.me/5213511276413" target="_blank" rel="noopener noreferrer" class="action-btn">tu solucion inteligente por whatsapp</a>
-        
-        <!-- Burbuja del Web Chat -->
         <div class="chat-bubble" id="chat-bubble">💬</div>
 
     </div>
