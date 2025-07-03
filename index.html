@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZamexIA | Inteligencia Estratégica Aplicada</title>
     
-    <!-- Google Fonts: Orbitron para el logo (futurista) y Poppins para el texto (moderno y legible) -->
+    <!-- Google Fonts: Poppins para el texto (moderno y legible) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- Estilos CSS -->
     <style>
@@ -18,7 +18,6 @@
             --color-secondary: #4A00E0; /* Azul profundo */
             --color-text: #E0E0E0;       /* Gris claro */
             --color-text-dark: #A0A0A0;  /* Gris oscuro para subtítulos */
-            --font-logo: 'Orbitron', sans-serif;
             --font-body: 'Poppins', sans-serif;
         }
 
@@ -50,7 +49,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%; /* Reducido un poco el padding para que el logo se ajuste mejor */
+            padding: 15px 5%;
             background-color: rgba(12, 12, 30, 0.8);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -58,9 +57,13 @@
             transition: background-color 0.3s ease;
         }
         
-        /* --- Estilo para el logo en imagen (NUEVO) --- */
+        /* --- Estilo para el logo en imagen --- */
+        .logo-link {
+            display: flex; /* Asegura que el logo se alinee correctamente */
+            align-items: center;
+        }
         .logo-img {
-            height: 45px; /* Altura del logo */
+            height: 40px; /* Altura del logo */
             width: auto;
             transition: transform 0.3s ease;
         }
@@ -118,6 +121,7 @@
         }
 
         .hero-section h1 {
+            font-family: 'Poppins', sans-serif; /* Usando Poppins para consistencia */
             font-size: 4rem;
             font-weight: 600;
             max-width: 800px;
@@ -216,7 +220,7 @@
         
         /* --- Responsividad --- */
         @media (max-width: 768px) {
-            .logo-img { height: 35px; } /* Logo más pequeño en móviles */
+            .logo-img { height: 35px; }
             nav { display: none; }
             .hero-section h1 { font-size: 2.5rem; }
             .content-section h2 { font-size: 2rem; }
@@ -383,12 +387,10 @@
 <body>
 
     <header>
-        <!-- Logo con imagen (MODIFICADO) -->
-        <div class="logo">
-            <a href="#inicio">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYIAAABDCAMAAAAiG1wzAAAAGFBMVEUAAADgAADwPT3/Li76HiD2T1L/Q0b////tza2iAAAAAXRSTlMAQObYZgAAAvBJREFUeNrt3d1yGjAUhlETcAM49P+/dpChJtoqMcsS3e2dZ37iSSbJECmKL78nEImAcNf12bEwA/EE4r18fr8fEIAAYgRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBGIE4gRiBH4uEOsH8V7+4/P7/Z0wP3/eP1/M0/n18z/fXzO8959//y/Mj38WkP35i8P8+fP8WWD+vj8vAIkQiBGIEegvED+8P8zP9+/3M/3+fD/s/jA/v1/M8/v3e2F++d9fYH79HxgQXyAIkQiBGIE4gQcE4p/vD/Pz+w/Mz/f39+c9kH5/v+wPzO/3d2F++R+YkN9fIEIiBGIE4gQeEIg/3j/Mz/f394P5/X6+v++H+f39yfx8/1+Y/+o/kBD/XyBCIgRiBOIEnv+P+f39wfx+vzD/eP8gPz/f3x+Y39/vD+b3+ysQIf8BQSKEEYgRuEf94f1hfr+/P5g/3j/Iz/f3R+Lz+zvx+f2d+Pz+Tnx+/yZ+vz/x+f2b+P1+Y/+eBJIggABGBGIE4gT+EyB+vj8wn9/fCebn+/v9wX5/PzB/vz+Y3x/M7w/m9w/mD4T4I4TEEYgRiBP4/0GE+P3+QPx+fzB+v18Qj98vCEfvFwSj9/vD+Hn/ID+RXyAQkQiBGIE4gQcE4vf7w/z+/mB+v78/nJ/f34/m5/fH8/P74/n5/fH8/P64/nC+/AEhkQiBGIE4gT8QiN/vD+b398fz8/tj+fn98fz8/jj+cH88f7g/nj/cH88f7o/nj/eP9+fz+/Pz+wvEGxAIiQiBGIE4gQcE4q/3l32E+Gk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/ISL+aT8hIv5pPyEi/mk/IeIv/wEwS9U2s9r20gAAAABJRU5ErkJggg==" alt="Logo de ZamexIA" class="logo-img">
-            </a>
-        </div>
+        <!-- Logo con imagen (CORREGIDO CON URL) -->
+        <a href="#inicio" class="logo-link">
+            <img src="https://i.ibb.co/C0W2wB3/zamexia-logo-strawberry.png" alt="Logo de ZamexIA" class="logo-img">
+        </a>
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#enfoque">Enfoque</a>
@@ -533,7 +535,7 @@
             }
         });
         
-        document.querySelectorAll('nav a').forEach(anchor => {
+        document.querySelectorAll('nav a, a.logo-link').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
