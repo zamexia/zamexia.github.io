@@ -219,13 +219,45 @@
             .hero-section h1 { font-size: 2.5rem; }
             .content-section h2 { font-size: 2rem; }
             .differentiator-section blockquote { font-size: 1.5rem; }
+            .fixed-action-buttons { right: 15px; bottom: 15px; } /* Ajuste para móviles */
+            .action-btn { font-size: 12px; padding: 8px 15px; }
         }
 
-        /* --- ESTILOS DEL CHAT INTERACTIVO --- */
-        .chat-bubble {
+        /* --- ESTILOS DE LOS BOTONES DE ACCIÓN FIJOS (NUEVO) --- */
+        .fixed-action-buttons {
             position: fixed;
             bottom: 30px;
             right: 30px;
+            z-index: 1002;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* Alinear botones a la derecha */
+            gap: 12px; /* Espacio entre botones */
+        }
+        
+        .action-btn {
+            background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+            box-shadow: 0 5px 15px rgba(142, 45, 226, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(142, 45, 226, 0.5);
+        }
+
+
+        /* --- ESTILOS DEL CHAT INTERACTIVO (MODIFICADO) --- */
+        .chat-bubble {
+            /* Se eliminan: position, bottom, right, z-index porque ahora los controla el contenedor .fixed-action-buttons */
             background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
             color: white;
             width: 60px;
@@ -238,7 +270,6 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(142, 45, 226, 0.4);
             transition: transform 0.3s ease;
-            z-index: 1002;
         }
         .chat-bubble:hover { transform: scale(1.1); }
         
@@ -403,8 +434,19 @@
         <p>Contáctanos a través de nuestro chat interactivo.</p>
     </footer>
 
-    <!-- ESTRUCTURA DEL CHAT INTERACTIVO -->
-    <div class="chat-bubble" id="chat-bubble">💬</div>
+    <!-- ESTRUCTURA DEL CHAT Y BOTONES FIJOS -->
+    <div class="fixed-action-buttons">
+        
+        <!-- Botón de Catálogo -->
+        <a href="https://zamexia.kyte.site" target="_blank" rel="noopener noreferrer" class="action-btn">mira nuestro catalogo y compra en linea</a>
+
+        <!-- Botón de WhatsApp -->
+        <a href="https://wa.me/5213511276413" target="_blank" rel="noopener noreferrer" class="action-btn">tu solucion inteligente por whatsapp</a>
+        
+        <!-- Burbuja del Web Chat -->
+        <div class="chat-bubble" id="chat-bubble">💬</div>
+
+    </div>
     
     <div class="chat-window" id="chat-window">
         <div class="chat-header">
@@ -425,7 +467,6 @@
     <!-- JAVASCRIPT para la lógica del chat -->
     <script>
         // URL del Webhook POST para comunicarse con el backend del chat en n8n
-        // ¡Esta URL ya está configurada con la que proporcionaste!
         const CHAT_WEBHOOK_URL = 'https://zamex.35.226.84.232.sslip.io:5678/webhook/zamexia-chat'; 
 
         // Elementos del DOM
