@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZamexIA | Inteligencia Estratégica Aplicada</title>
     
-    <!-- Google Fonts: Poppins para el texto (moderno y legible) -->
+    <!-- Google Fonts: Orbitron y Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- Estilos CSS -->
     <style>
         :root {
-            --color-background: #0C0C1E; /* Negro azulado muy oscuro */
-            --color-primary: #8E2DE2;   /* Violeta */
-            --color-secondary: #4A00E0; /* Azul profundo */
-            --color-text: #E0E0E0;       /* Gris claro */
-            --color-text-dark: #A0A0A0;  /* Gris oscuro para subtítulos */
+            --color-background: #0C0C1E;
+            --color-primary: #8E2DE2;
+            --color-secondary: #4A00E0;
+            --color-text: #E0E0E0;
+            --color-text-dark: #A0A0A0;
+            --font-logo: 'Orbitron', sans-serif;
             --font-body: 'Poppins', sans-serif;
         }
 
@@ -57,19 +58,31 @@
             transition: background-color 0.3s ease;
         }
         
-        /* --- Estilo para el logo en imagen --- */
-        .logo-link {
-            display: flex; /* Asegura que el logo se alinee correctamente */
+        /* --- Estilo para el nuevo logo con SVG (CORREGIDO Y FINAL) --- */
+        .logo {
+            display: flex;
             align-items: center;
+            gap: 12px; /* Espacio entre el ícono y el texto */
+            text-decoration: none;
+            color: var(--color-text);
+            font-family: var(--font-logo);
+            font-size: 2em;
         }
-        .logo-img {
-            height: 40px; /* Altura del logo */
+        .logo-icon {
+            height: 0.9em; /* Se ajusta al tamaño de la fuente */
             width: auto;
-            transition: transform 0.3s ease;
+            /* La animación de relleno se eliminó para simplicidad, pero se puede agregar de nuevo */
         }
-        .logo-img:hover {
-            transform: scale(1.05);
+        .strawberry-body {
+            fill: var(--color-primary); /* El cuerpo de la fresa toma el color primario */
         }
+        .strawberry-leaf {
+            fill: var(--color-text); /* Las hojas toman el color del texto */
+        }
+        .logo span {
+             text-shadow: 0 0 5px var(--color-primary), 0 0 10px var(--color-secondary);
+        }
+
 
         nav a {
             color: var(--color-text);
@@ -121,7 +134,6 @@
         }
 
         .hero-section h1 {
-            font-family: 'Poppins', sans-serif; /* Usando Poppins para consistencia */
             font-size: 4rem;
             font-weight: 600;
             max-width: 800px;
@@ -220,7 +232,7 @@
         
         /* --- Responsividad --- */
         @media (max-width: 768px) {
-            .logo-img { height: 35px; }
+            .logo { font-size: 1.5em; }
             nav { display: none; }
             .hero-section h1 { font-size: 2.5rem; }
             .content-section h2 { font-size: 2rem; }
@@ -387,9 +399,13 @@
 <body>
 
     <header>
-        <!-- Logo con imagen (CORREGIDO CON URL) -->
-        <a href="#inicio" class="logo-link">
-            <img src="https://i.ibb.co/C0W2wB3/zamexia-logo-strawberry.png" alt="Logo de ZamexIA" class="logo-img">
+        <!-- Logo con SVG (versión final y definitiva) -->
+        <a href="#inicio" class="logo">
+            <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path class="strawberry-leaf" d="M40 25 C 30 15, 40 5, 50 15 C 60 5, 70 15, 60 25 Z" />
+                <path class="strawberry-body" d="M50 20 C 10 35, 10 80, 50 95 C 90 80, 90 35, 50 20 Z" />
+            </svg>
+            <span>ZamexIA</span>
         </a>
         <nav>
             <a href="#inicio">Inicio</a>
@@ -444,11 +460,9 @@
 
     <!-- ESTRUCTURA DEL CHAT Y BOTONES FIJOS -->
     <div class="fixed-action-buttons">
-        
         <a href="https://zamexia.kyte.site" target="_blank" rel="noopener noreferrer" class="action-btn">mira nuestro catalogo y compra en linea</a>
         <a href="https://wa.me/5213511276413" target="_blank" rel="noopener noreferrer" class="action-btn">tu solucion inteligente por whatsapp</a>
         <div class="chat-bubble" id="chat-bubble">💬</div>
-
     </div>
     
     <div class="chat-window" id="chat-window">
@@ -499,35 +513,27 @@
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const userMessage = chatInputField.value.trim();
-
             if (!userMessage) return;
-
             addMessageToChat(userMessage, 'user');
             chatInputField.value = '';
-
             const typingIndicator = document.createElement('div');
             typingIndicator.classList.add('chat-message', 'ai-message', 'typing-indicator');
             typingIndicator.textContent = '...';
             chatBody.appendChild(typingIndicator);
             chatBody.scrollTop = chatBody.scrollHeight;
-
             try {
                 const response = await fetch(CHAT_WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: userMessage }),
                 });
-
                 if (!response.ok) {
                     throw new Error(`Error en la respuesta del servidor: ${response.status}`);
                 }
-
                 const data = await response.json();
                 const aiReply = data.reply;
-
                 typingIndicator.remove();
                 addMessageToChat(aiReply, 'ai');
-
             } catch (error) {
                 typingIndicator.remove();
                 addMessageToChat('Lo siento, ha ocurrido un error de conexión. Por favor, inténtalo de nuevo más tarde.', 'ai');
@@ -535,7 +541,7 @@
             }
         });
         
-        document.querySelectorAll('nav a, a.logo-link').forEach(anchor => {
+        document.querySelectorAll('nav a, a.logo').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
