@@ -329,7 +329,7 @@
         .chat-header span { font-size: 1.1rem; }
         .close-chat { cursor: pointer; font-size: 1.5rem; }
 
-        .chat-body {
+        .chat-messages { /* ID CAMBIADO DE chat-body A chat-messages PARA COMPATIBILIDAD CON NUEVO SCRIPT */
             flex-grow: 1;
             padding: 15px;
             overflow-y: auto;
@@ -337,7 +337,8 @@
             flex-direction: column;
         }
         
-        .chat-message {
+        /* SE AÑADIÓ LA CLASE .message QUE USA EL NUEVO SCRIPT */
+        .message {
             max-width: 80%;
             padding: 10px 15px;
             border-radius: 18px;
@@ -353,14 +354,15 @@
             border-bottom-right-radius: 4px;
         }
 
-        .ai-message {
+        /* CLASE CAMBIADA DE .ai-message A .gemini-message PARA COMPATIBILIDAD */
+        .gemini-message {
             background-color: #2a2a3e;
             color: var(--color-text);
             align-self: flex-start;
             border-bottom-left-radius: 4px;
         }
         
-        .typing-indicator {
+        .loading-indicator { /* CAMBIADO DE .typing-indicator PARA COMPATIBILIDAD */
             align-self: flex-start;
             font-style: italic;
             color: var(--color-text-dark);
@@ -460,9 +462,10 @@
 
     <!-- ESTRUCTURA DEL CHAT Y BOTONES FIJOS -->
     <div class="fixed-action-buttons">
+        <!-- PUNTO 2: El botón del chat ahora está arriba del catálogo -->
+        <div class="chat-bubble" id="chat-bubble">💬</div>
         <a href="https://zamexia.kyte.site" target="_blank" rel="noopener noreferrer" class="action-btn">mira nuestro catalogo y compra en linea</a>
         <a href="https://wa.me/5213511276413" target="_blank" rel="noopener noreferrer" class="action-btn">tu solucion inteligente por whatsapp</a>
-        <div class="chat-bubble" id="chat-bubble">💬</div>
     </div>
     
     <div class="chat-window" id="chat-window">
@@ -470,77 +473,90 @@
             <span>Asistente ZamexIA</span>
             <span class="close-chat" id="close-chat">×</span>
         </div>
-        <div class="chat-body" id="chat-body">
-            <div class="chat-message ai-message">
+        <!-- ID CAMBIADO PARA COMPATIBILIDAD CON NUEVO SCRIPT -->
+        <div class="chat-messages" id="chat-messages">
+            <!-- CLASES CAMBIADAS PARA COMPATIBILIDAD CON NUEVO SCRIPT -->
+            <div class="message gemini-message">
                 💬 Hablemos de tu empresa. Estoy listo para escucharte.
             </div>
         </div>
         <form class="chat-input" id="chat-form">
-            <input type="text" id="chat-input-field" placeholder="Escribe tu mensaje..." autocomplete="off">
+            <!-- ID CAMBIADO PARA COMPATIBILIDAD CON NUEVO SCRIPT -->
+            <input type="text" id="message-input" placeholder="Escribe tu mensaje..." autocomplete="off">
             <button type="submit">Enviar</button>
         </form>
     </div>
 
-    <!-- JAVASCRIPT para la lógica del chat -->
+    <!-- PUNTO 3: Se borró el script antiguo y se pegó el nuevo -->
     <script>
-        const CHAT_WEBHOOK_URL = 'https://zamex.35.226.84.232.sslip.io/webhook/gemini-chat'; 
+        const form = document.getElementById('chat-form');
+        const input = document.getElementById('message-input');
+        const messagesContainer = document.getElementById('chat-messages');
 
+        // PUNTO 1: URL del webhook actualizada
+        const webhookURL = 'https://zamex.35.184.200.106.sslip.io/webhook/gemini-chat';
+        
         const chatBubble = document.getElementById('chat-bubble');
         const chatWindow = document.getElementById('chat-window');
         const closeChatBtn = document.getElementById('close-chat');
-        const chatForm = document.getElementById('chat-form');
-        const chatInputField = document.getElementById('chat-input-field');
-        const chatBody = document.getElementById('chat-body');
 
+        // Lógica para abrir y cerrar la ventana del chat
         const toggleChatWindow = () => {
             chatWindow.classList.toggle('active');
             if (chatWindow.classList.contains('active')) {
-                chatInputField.focus();
+                input.focus();
             }
         };
 
         chatBubble.addEventListener('click', toggleChatWindow);
         closeChatBtn.addEventListener('click', toggleChatWindow);
 
-        const addMessageToChat = (message, sender) => {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('chat-message', `${sender}-message`);
-            messageDiv.textContent = message;
-            chatBody.appendChild(messageDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
-        };
-
-        chatForm.addEventListener('submit', async (e) => {
+        // Lógica del formulario de envío
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const userMessage = chatInputField.value.trim();
-            if (!userMessage) return;
-            addMessageToChat(userMessage, 'user');
-            chatInputField.value = '';
-            const typingIndicator = document.createElement('div');
-            typingIndicator.classList.add('chat-message', 'ai-message', 'typing-indicator');
-            typingIndicator.textContent = '...';
-            chatBody.appendChild(typingIndicator);
-            chatBody.scrollTop = chatBody.scrollHeight;
+            const question = input.value.trim();
+            if (!question) return;
+
+            addMessage(question, 'user-message');
+            input.value = '';
+            
+            const loadingElement = addMessage('Escribiendo...', 'loading-indicator');
+
             try {
-                const response = await fetch(CHAT_WEBHOOK_URL, {
+                const response = await fetch(webhookURL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: userMessage }),
+                    body: JSON.stringify({ message: question }) 
                 });
+
                 if (!response.ok) {
-                    throw new Error(`Error en la respuesta del servidor: ${response.status}`);
+                    throw new Error(`Error del servidor: ${response.status}`);
                 }
+
                 const data = await response.json();
-                const aiReply = data.reply;
-                typingIndicator.remove();
-                addMessageToChat(aiReply, 'ai');
+                
+                const geminiResponse = data.respuesta; 
+
+                loadingElement.remove();
+                addMessage(geminiResponse, 'gemini-message');
+
             } catch (error) {
-                typingIndicator.remove();
-                addMessageToChat('Lo siento, ha ocurrido un error de conexión. Por favor, inténtalo de nuevo más tarde.', 'ai');
-                console.error('Error al contactar el webhook:', error);
+                loadingElement.remove();
+                addMessage('Lo siento, hubo un error al interpretar la respuesta. Revisa la consola del navegador (F12).', 'gemini-message');
+                console.error('Error:', error);
             }
         });
-        
+
+        function addMessage(text, className) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', className);
+            messageElement.textContent = text;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            return messageElement;
+        }
+
+        // Lógica de scroll suave para el menú (opcional, pero mejora la experiencia)
         document.querySelectorAll('nav a, a.logo').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
