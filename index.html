@@ -483,7 +483,7 @@
 
     <!-- JAVASCRIPT para la lógica del chat -->
     <script>
-        const CHAT_WEBHOOK_URL = 'https://zamex.35.226.84.232.sslip.io:5678/webhook/zamexia-chat'; 
+        const CHAT_WEBHOOK_URL = 'https://zamex.35.226.84.232.sslip.io/webhook/gemini-chat'; 
 
         const chatBubble = document.getElementById('chat-bubble');
         const chatWindow = document.getElementById('chat-window');
@@ -537,7 +537,7 @@
             } catch (error) {
                 typingIndicator.remove();
                 addMessageToChat('Lo siento, ha ocurrido un error de conexión. Por favor, inténtalo de nuevo más tarde.', 'ai');
-                console.error('Error al contactar el webhook de n8n:', error);
+                console.error('Error al contactar el webhook:', error);
             }
         });
         
